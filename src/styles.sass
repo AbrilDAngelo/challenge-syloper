@@ -1,1 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
+@use 'variables'
+
+@mixin flexCenter($direction: row, $bg)
+    display: flex!important
+    justify-content: center!important
+    align-items: center!important
+    flex-direction: $direction
+    background-color: $bg
+
+h1, h2
+    color: variables.$secondaryTxt
+    font: 100% variables.$font-stack
+
+button 
+    &::after
+        content: 'Hola'
+
+footer
+    @include flexCenter($direction: column, $bg:variables.$secondaryTxt)
+    color: variables.$secondaryTxt
+    font-weight: 600!important
+    font: 100% variables.$font-stack 

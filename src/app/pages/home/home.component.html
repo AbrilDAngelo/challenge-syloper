@@ -1,0 +1,7 @@
+<h1>Movies</h1>
+<div *ngIf="isLoading$ | async">Loading...</div>
+<div *ngIf="error$ | async as error">{{ error }}</div>
+<div></div>
+<div>
+  <p *ngFor="let movie of movies$ | async">{{ movie.title }}</p>
+</div>
