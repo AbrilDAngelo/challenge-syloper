@@ -8,16 +8,20 @@
     flex-direction: $direction
     background-color: $bg
 
-h1, h2
-    color: variables.$secondaryTxt
-    font: 100% variables.$font-stack
+body
+    font-family: variables.$font-main, Arial, sans-serif
 
-button 
+button
     &::after
         content: 'Hola'
 
 footer
-    @include flexCenter($direction: column, $bg:variables.$secondaryTxt)
-    color: variables.$secondaryTxt
+    @include flexCenter($direction: column, $bg:variables.$color-text-accent-dark)
+    color: color-text-accent-dark
     font-weight: 600!important
-    font: 100% variables.$font-stack 
+
+.carousel
+    overflow-x: scroll
+    overflow-y: hidden
+    display: flex
+    flex-direction: row

@@ -16,17 +16,17 @@ import { SharedModule } from './shared/shared.module';
 import { environment } from '../environments/environment';
 import { reducers } from './store/movies.reducers';
 import { MoviesEffects } from './store/movies.effects';
+import { ImagePipe } from './pipes/image.pipe';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ComponentsModule,
     PagesModule,
     SharedModule,
     HttpClientModule,
-    StoreModule.forRoot({reducers}, {}),
+    StoreModule.forRoot({ reducers }, {}),
     EffectsModule.forRoot([MoviesEffects]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,

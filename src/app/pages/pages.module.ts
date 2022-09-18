@@ -7,11 +7,15 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { reducers } from '../store/movies.reducers';
 import { MoviesEffects } from '../store/movies.effects';
+import { ComponentsModule } from '../components/components.module';
+import { PipesModule } from '../pipes/pipes.module';
 
 @NgModule({
   declarations: [HomeComponent, MovieComponent, SearchResultsComponent],
   imports: [
     CommonModule,
+    ComponentsModule,
+    PipesModule,
     StoreModule.forFeature('movies', reducers),
     EffectsModule.forFeature([MoviesEffects]),
   ],
