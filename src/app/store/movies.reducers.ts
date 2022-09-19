@@ -6,6 +6,7 @@ export const initialState: MoviesState = {
   isLoading: false,
   movies: [],
   error: null,
+  selectedMovie: null,
 };
 
 export const reducers = createReducer(
@@ -20,5 +21,9 @@ export const reducers = createReducer(
     ...state,
     isLoading: false,
     error: action.error,
+  })),
+  on(MoviesActions.setSelectedMovie, (state, action) => ({
+    ...state,
+    selectedMovie: action.movie,
   }))
 );
