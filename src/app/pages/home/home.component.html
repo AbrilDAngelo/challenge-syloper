@@ -11,3 +11,12 @@
     ></app-actor-carousel-card>
   </ng-container>
 </div>
+<div class="carousel">
+  <ng-container *ngFor="let movie of movies$ | async">
+    <app-movie-carousel-card
+      [posterUrl]="movie.poster_path | image"
+      [title]="movie.title"
+      [release_date]="movie.release_date"
+    ></app-movie-carousel-card>
+  </ng-container>
+</div>

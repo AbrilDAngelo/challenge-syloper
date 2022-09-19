@@ -1,11 +1,6 @@
 @use '../../common/_variables' as variables
 @use '../../common/_mixins' as mixins
 
-.card-container
-    display: flex
-    flex-direction: column
-    align-items: stretch
-    height: 100%
 .actor-carousel-card
     @include mixins.carousel-card
     border: 1px solid variables.$color-light-grey 1
@@ -21,17 +16,7 @@
     width: 100%
     height: 100%
     object-fit: cover
-.actor-name
-    padding-top: 0.7em
-    display: block
-    font-weight: bold
-    font-size: 1em
-    color: variables.$color-text-dark
 .actor-role
-    padding-top: 0.2em
-    display: block
-    font-weight: 300
-    font-size: 0.9em
-    color: variables.$color-text-dark
+    @include mixins.carousel-card-subtitle(variables.$color-text-dark)
 .info
     padding-inline: 0.5em
