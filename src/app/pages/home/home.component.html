@@ -1,22 +1,65 @@
-<h1>Movies</h1>
-<div *ngIf="isLoading$ | async">Loading...</div>
-<div *ngIf="error$ | async as error">{{ error }}</div>
-<div></div>
-<div class="carousel">
-  <ng-container *ngFor="let movie of movies$ | async">
-    <app-actor-carousel-card
-      [imgUrl]="movie.poster_path | image"
-      [name]="movie.title"
-      [role]="movie.original_title"
-    ></app-actor-carousel-card>
-  </ng-container>
-</div>
-<div class="carousel">
-  <ng-container *ngFor="let movie of movies$ | async">
-    <app-movie-carousel-card
-      [posterUrl]="movie.poster_path | image"
-      [title]="movie.title"
-      [release_date]="movie.release_date"
-    ></app-movie-carousel-card>
-  </ng-container>
+<div class="container">
+  <div class="div" class="now-playing-container">
+    <h1>Cartelera</h1>
+    <div *ngIf="isLoading$ | async">Loading...</div>
+    <div *ngIf="error$ | async as error">{{ error }}</div>
+    <div
+      id="carouselExampleCaptions"
+      class="carousel slide"
+      data-bs-ride="carousel"
+    >
+      <div class="carousel-inner">
+        <app-now-playing-carousel-slide
+          [backdropUrl]="(movies$ | async)![0].backdrop_path | image: 'w1280'"
+          [title]="(movies$ | async)![0].title"
+          [overview]="(movies$ | async)![0].overview"
+          active="active"
+        ></app-now-playing-carousel-slide>
+        <ng-container *ngFor="let movie of movies$ | async | slice: 1">
+          <app-now-playing-carousel-slide
+            [backdropUrl]="movie.backdrop_path | image: 'w1280'"
+            [title]="movie.title"
+            [overview]="movie.overview"
+          ></app-now-playing-carousel-slide>
+        </ng-container>
+      </div>
+      <button
+        class="carousel-control-prev"
+        type="button"
+        data-bs-target="#carouselExampleCaptions"
+        data-bs-slide="prev"
+      >
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button
+        class="carousel-control-next"
+        type="button"
+        data-bs-target="#carouselExampleCaptions"
+        data-bs-slide="next"
+      >
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- <div class="carousel">
+    <ng-container *ngFor="let movie of movies$ | async">
+      <app-actor-carousel-card
+        [imgUrl]="movie.poster_path | image"
+        [name]="movie.title"
+        [role]="movie.original_title"
+      ></app-actor-carousel-card>
+    </ng-container>
+  </div> -->
+  <div class="carousel">
+    <ng-container *ngFor="let movie of movies$ | async">
+      <app-movie-carousel-card
+        [posterUrl]="movie.poster_path | image"
+        [title]="movie.title"
+        [release_date]="movie.release_date"
+      ></app-movie-carousel-card>
+    </ng-container>
+  </div>
 </div>
