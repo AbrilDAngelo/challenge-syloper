@@ -2,11 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { AppState } from 'src/app/interfaces/app-state.interface';
 import { Observable } from 'rxjs';
-import { Cast, Movie } from 'src/app/interfaces/tmdb.interface';
-import { selectedMovieSelector } from '../../store/movies.selectors';
-import { MoviesService } from '../../services/movies.service';
-import { MovieDetails } from '../../interfaces/tmdb.interface';
+import { Cast } from 'src/app/interfaces/tmdb.interface';
+import {
+  selectedMovieDetailsSelector,
+  selectedMovieCreditsSelector,
+} from '../../store/movies.selectors';
+import { MovieDetails, Credits } from '../../interfaces/tmdb.interface';
 import { Location } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
+import * as MovieActions from '../../store/movies.actions';
 
 @Component({
   selector: 'app-movie',
@@ -14,44 +18,50 @@ import { Location } from '@angular/common';
   styleUrls: ['./movie.component.sass'],
 })
 export class MovieComponent implements OnInit {
-  selectedMovie$: Observable<Movie | null>;
-  movieDetails!: MovieDetails;
+  selectedMovieDetails$: Observable<MovieDetails | null>;
+  selectedMovieDetails!: MovieDetails;
+  selectedMovieCredits$: Observable<Credits | null>;
   cast!: Cast[];
-  movieId: number | undefined;
+  movieId!: number;
+  noImgUrl = '../../../../assets/no-image-banner.png';
+
   constructor(
     private store: Store<AppState>,
-    private moviesService: MoviesService,
-    private location: Location
+    private location: Location,
+    private activatedRoute: ActivatedRoute
   ) {
-    this.selectedMovie$ = this.store.pipe(select(selectedMovieSelector));
+    this.selectedMovieDetails$ = this.store.pipe(
+      select(selectedMovieDetailsSelector)
+    );
+    this.selectedMovieCredits$ = this.store.pipe(
+      select(selectedMovieCreditsSelector)
+    );
   }
 
   ngOnInit(): void {
-    this.loadSelectedMovie();
+    this.activatedRoute.queryParams.subscribe((params) => {
+      this.movieId = params['id'];
+      this.store.dispatch(
+        MovieActions.loadSelectedMovieDetails({ movieId: this.movieId })
+      );
+      this.store.dispatch(
+        MovieActions.loadSelectedMovieCredits({ movieId: this.movieId })
+      );
+      this.selectedMovieDetails$.subscribe((res) => {
+        if (res !== null) {
+          this.selectedMovieDetails = res;
+        }
+      });
+      this.selectedMovieCredits$.subscribe((res) => {
+        if (res !== null) {
+          this.cast = res.cast.slice(0, 6);
+        }
+      });
+    });
   }
 
-  loadSelectedMovie() {
-    this.selectedMovie$.subscribe((res) => (this.movieId = res?.id));
-    if (this.movieId !== undefined) {
-      this.moviesService.getMovieById(this.movieId).subscribe((res) => {
-        this.movieDetails = res;
-        console.log(this.movieDetails);
-      });
-    } else {
-      return;
-    }
-    this.selectedMovie$.subscribe((res) => (this.movieId = res?.id));
-    if (this.movieId !== undefined) {
-      this.moviesService.getMovieCredits(this.movieId).subscribe((res) => {
-        this.cast = res.cast.slice(0, 6);
-        console.log(this.movieDetails);
-      });
-    } else {
-      return;
-    }
-  }
-
-  goBack() {
-    this.location.back();
-  }
+  // Código alternativo para regresar a la locación anterior en lugar de home
+  // goBack() {
+  //   this.location.back();
+  // }
 }

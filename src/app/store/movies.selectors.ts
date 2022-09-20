@@ -17,7 +17,11 @@ export const isLoadingSearchResultsSelector = createSelector(
 );
 export const isLoadingSelectedSelector = createSelector(
   selectFeature,
-  (state) => state.isLoadingSelectedMovie 
+  (state) => state.isLoadingSelectedMovie
+);
+export const isLoadingSelectedDetailsSelector = createSelector(
+  selectFeature,
+  (state) => state.isLoadingSelectedMovieDetails
 );
 // Now playing
 export const nowPlayingMoviesSelector = createSelector(
@@ -43,6 +47,16 @@ export const errorSelector = createSelector(
 export const selectedMovieSelector = createSelector(
   selectFeature,
   (state) => state.selectedMovie
+);
+// Selected details
+export const selectedMovieDetailsSelector = createSelector(
+  selectFeature,
+  (state) => state.selectedMovieDetails
+);
+// Selected credits
+export const selectedMovieCreditsSelector = createSelector(
+  selectFeature,
+  (state) => state.selectedMovieCredits
 );
 // Search query
 export const searchQuerySelector = createSelector(

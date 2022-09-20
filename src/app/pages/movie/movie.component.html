@@ -1,11 +1,11 @@
-<ng-container *ngIf="movieDetails">
+<ng-container *ngIf="selectedMovieDetails">
   <div
     class="movie-main-info-container"
     [ngStyle]="{
       'background-image':
         'linear-gradient(to right, #032541b1 50%, #01b3e4cb),
         url(' +
-        (movieDetails.backdrop_path | image: 'w1280') +
+        (selectedMovieDetails.backdrop_path | image: 'w1280':'backdrop') +
         ')'
     }"
   >
@@ -14,16 +14,22 @@
         <div class="poster-card">
           <img
             class="poster"
-            [src]="movieDetails.poster_path | image: 'w780'"
+            [src]="
+              selectedMovieDetails.poster_path
+                ? (selectedMovieDetails.poster_path | image: 'w780':'poster')
+                : noImgUrl
+            "
             alt="name"
           />
         </div>
       </div>
       <div class="col-md-9 col-sm-12 movie-info">
-        <h2>{{ movieDetails.title }}</h2>
-        <app-rating [movieRating]="movieDetails.vote_average"></app-rating>
-        <h5>{{ movieDetails.overview }}</h5>
-        <button class="btn-back" (click)="goBack()">Regresar</button>
+        <h2>{{ selectedMovieDetails.title }}</h2>
+        <app-rating
+          [movieRating]="selectedMovieDetails.vote_average"
+        ></app-rating>
+        <h5>{{ selectedMovieDetails.overview }}</h5>
+        <button class="btn-back" routerLink="/">Regresar</button>
       </div>
     </div>
   </div>

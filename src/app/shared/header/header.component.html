@@ -26,9 +26,12 @@
                     *ngFor="let result of searchResults$ | async | slice: 0:6"
                     class="list-group-item"
                   >
-                    <a routerLink="/movie" (click)="selectMovie(result)">{{
-                      result.title
-                    }}</a>
+                    <a
+                      routerLink="/movie"
+                      [queryParams]="{ id: result.id }"
+                      (click)="selectMovie(result)"
+                      >{{ result.title }}</a
+                    >
                   </li>
                   <ng-container
                     *ngIf="
@@ -36,7 +39,9 @@
                       (searchResults$ | async)?.length == 0
                     "
                   >
-                    <li>No se encontraron resultados</li>
+                    <li class="list-group-item">
+                      No se encontraron resultados
+                    </li>
                   </ng-container>
                 </ul>
               </div>

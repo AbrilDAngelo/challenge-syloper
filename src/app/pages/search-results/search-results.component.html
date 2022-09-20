@@ -5,8 +5,11 @@
     </h2>
   </div>
   <div class="row movies-container">
-    <div class="col-sm-6 col-md-3" *ngFor="let movie of searchResults">
+    <div class="col-sm-6 col-md-3" *ngFor="let movie of searchResults$ | async">
       <app-movie-card [movie]="movie"></app-movie-card>
     </div>
   </div>
+  <ng-container *ngIf="!searchResults || searchResults?.length == 0">
+    <h3>No hay resultados para la búsqueda</h3>
+  </ng-container>
 </div>

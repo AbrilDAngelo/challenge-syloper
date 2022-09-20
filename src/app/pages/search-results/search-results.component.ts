@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { select, Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { AppState } from 'src/app/interfaces/app-state.interface';
 import { Movie } from '../../interfaces/tmdb.interface';
-import { MoviesService } from '../../services/movies.service';
+import * as MovieActions from '../../store/movies.actions';
+import { ActivatedRoute } from '@angular/router';
+import { searchResultsMoviesSelector } from '../../store/movies.selectors';
 
 @Component({
   selector: 'app-search-results',
@@ -8,13 +13,31 @@ import { MoviesService } from '../../services/movies.service';
   styleUrls: ['./search-results.component.sass'],
 })
 export class SearchResultsComponent implements OnInit {
-  searchQuery = 'Iron Man';
-  searchResults: Movie[] = [];
-  constructor(private moviesService: MoviesService) {}
+  searchQuery!: string;
+  searchResults$: Observable<Movie[]>;
+  searchResults!: Movie[];
+  constructor(
+    private store: Store<AppState>,
+    private activatedRoute: ActivatedRoute
+  ) {
+    this.searchResults$ = this.store.pipe(select(searchResultsMoviesSelector));
+  }
 
   ngOnInit(): void {
-    this.moviesService.searchMovies(this.searchQuery).subscribe((res) => {
-      this.searchResults = res.results.slice(0, 8);
+    this.activatedRoute.queryParams.subscribe((params) => {
+      if (!params['query']) {
+        this.searchQuery = '';
+      } else {
+        this.searchQuery = params['query'];
+      }
+      this.store.dispatch(
+        MovieActions.loadSearchResults({ searchQuery: this.searchQuery })
+      );
+      this.searchResults$.subscribe((res) => {
+        if (res !== null) {
+          this.searchResults = res;
+        }
+      });
     });
   }
 }

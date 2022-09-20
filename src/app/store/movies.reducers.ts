@@ -7,11 +7,15 @@ export const initialState: MoviesState = {
   isLoadingSearchResultsMovies: false,
   isLoadingPopularMovies: false,
   isLoadingSelectedMovie: false,
+  isLoadingSelectedMovieDetails: false,
+  isLoadingSelectedMovieCredits: false,
   nowPlayingMovies: [],
   popularMovies: [],
   searchResultsMovies: [],
   error: null,
   selectedMovie: null,
+  selectedMovieDetails: null,
+  selectedMovieCredits: null,
   searchQuery: null,
 };
 
@@ -62,10 +66,42 @@ export const reducers = createReducer(
     isLoadingSearchResultsMovies: false,
     error: action.error,
   })),
-  // Selected
+  // Selected movie
   on(MoviesActions.setSelectedMovie, (state, action) => ({
     ...state,
     selectedMovie: action.movie,
+  })),
+  // Selected movie details
+  on(MoviesActions.loadSelectedMovieDetails, (state, action) => ({
+    ...state,
+    isLoadingSelectedMovieDetails: false,
+    selectedMovieId: action.movieId,
+  })),
+  on(MoviesActions.loadSelectedMovieDetailsSuccess, (state, action) => ({
+    ...state,
+    isLoadingSelectedMovieDetails: false,
+    selectedMovieDetails: action.selectedMovieDetails,
+  })),
+  on(MoviesActions.loadSelectedMovieDetailsFailure, (state, action) => ({
+    ...state,
+    isLoadingSelectedMovieDetails: false,
+    error: action.error,
+  })),
+  // Selected movie credits
+  on(MoviesActions.loadSelectedMovieCredits, (state, action) => ({
+    ...state,
+    isLoadingSelectedMovieCredits: false,
+    selectedMovieCreditsId: action.movieId,
+  })),
+  on(MoviesActions.loadSelectedMovieCreditsSuccess, (state, action) => ({
+    ...state,
+    isLoadingSelectedMovieCredits: false,
+    selectedMovieCredits: action.selectedMovieCredits,
+  })),
+  on(MoviesActions.loadSelectedMovieCreditsFailure, (state, action) => ({
+    ...state,
+    isLoadingSelectedMovieCredits: false,
+    error: action.error,
   })),
   // Search query
   on(MoviesActions.setSearchQuery, (state, action) => ({

@@ -6,6 +6,7 @@ import { select, Store } from '@ngrx/store';
 import { AppState } from 'src/app/interfaces/app-state.interface';
 import * as MovieActions from '../../store/movies.actions';
 import { searchResultsMoviesSelector } from '../../store/movies.selectors';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -18,7 +19,7 @@ export class HeaderComponent implements OnInit {
   showSuggestions: boolean = false;
   searchResults$: Observable<Movie[]>;
 
-  constructor(private store: Store<AppState>) {
+  constructor(private store: Store<AppState>, private router: Router) {
     this.searchResults$ = this.store.pipe(select(searchResultsMoviesSelector));
   }
 
@@ -42,10 +43,20 @@ export class HeaderComponent implements OnInit {
   }
 
   searchMovies() {
+    if (this.query.trim().length === 0) {
+      return;
+    }
     this.store.dispatch(
       MovieActions.loadSearchResults({ searchQuery: this.query })
     );
-    this.showSuggestions = true;
+    this.store.dispatch(
+      MovieActions.setSearchQuery({ searchQuery: this.query })
+    );
+    this.showSuggestions = false;
+    // this.router.navigateByUrl('/search');
+    this.router.navigate(['/search'], {
+      queryParams: { query: this.query },
+    });
   }
 
   selectMovie(movie: Movie) {
