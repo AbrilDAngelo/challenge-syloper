@@ -43,23 +43,24 @@
       </button>
     </div>
   </div>
-
-  <!-- <div class="carousel">
-    <ng-container *ngFor="let movie of movies$ | async">
-      <app-actor-carousel-card
-        [imgUrl]="movie.poster_path | image"
-        [name]="movie.title"
-        [role]="movie.original_title"
-      ></app-actor-carousel-card>
-    </ng-container>
-  </div> -->
-  <div class="carousel">
-    <ng-container *ngFor="let movie of movies$ | async">
-      <app-movie-carousel-card
+  <h3>Películas</h3>
+  <div class="row movies-container">
+    <div class="col-sm-6 col-md-3" *ngFor="let movie of movies$ | async">
+      <app-movie-card
         [posterUrl]="movie.poster_path | image"
         [title]="movie.title"
         [release_date]="movie.release_date"
-      ></app-movie-carousel-card>
-    </ng-container>
+        [rating]="movie.vote_average"
+      ></app-movie-card>
+    </div>
   </div>
+  <!-- <div class="carousel">
+    <ng-container *ngFor="let movie of movies$ | async">
+      <app-movie-card
+        [posterUrl]="movie.poster_path | image"
+        [title]="movie.title"
+        [release_date]="movie.release_date"
+      ></app-movie-card>
+    </ng-container>
+  </div> -->
 </div>
