@@ -27,6 +27,10 @@ export class MovieComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loadSelectedMovie();
+  }
+
+  loadSelectedMovie() {
     this.selectedMovie$.subscribe((res) => (this.movieId = res?.id));
     if (this.movieId !== undefined) {
       this.moviesService.getMovieById(this.movieId).subscribe((res) => {
@@ -39,7 +43,7 @@ export class MovieComponent implements OnInit {
     this.selectedMovie$.subscribe((res) => (this.movieId = res?.id));
     if (this.movieId !== undefined) {
       this.moviesService.getMovieCredits(this.movieId).subscribe((res) => {
-        this.cast = res.cast.slice(0,6);
+        this.cast = res.cast.slice(0, 6);
         console.log(this.movieDetails);
       });
     } else {

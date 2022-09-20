@@ -1,11 +1,13 @@
-<ng-container *ngIf="isLoading$ | async">
+<ng-container
+  *ngIf="
+    (isLoadingNowPlayingMovies$ | async) || (isLoadingPopularMovies$ | async)
+  "
+>
   <app-spinner></app-spinner>
 </ng-container>
 <div class="container">
   <div class="div" class="now-playing-container">
     <h1>Cartelera</h1>
-    <!-- <div *ngIf="isLoading$ | async">Loading...</div>
-    <div *ngIf="error$ | async as error">{{ error }}</div> -->
     <div
       id="carouselExampleCaptions"
       class="carousel slide"
@@ -13,10 +15,12 @@
     >
       <div class="carousel-inner">
         <app-now-playing-carousel-slide
-          [movie]="(movies$ | async)![0]"
+          [movie]="(nowPlayingMovies$ | async)![0]"
           active="active"
         ></app-now-playing-carousel-slide>
-        <ng-container *ngFor="let movie of movies$ | async | slice: 1">
+        <ng-container
+          *ngFor="let movie of nowPlayingMovies$ | async | slice: 1"
+        >
           <app-now-playing-carousel-slide
             [movie]="movie"
           ></app-now-playing-carousel-slide>
@@ -44,7 +48,10 @@
   </div>
   <h3>Películas</h3>
   <div class="row movies-container">
-    <div class="col-sm-6 col-md-3 flex-card-container" *ngFor="let movie of movies$ | async">
+    <div
+      class="col-sm-6 col-md-3 flex-card-container"
+      *ngFor="let movie of popularMovies$ | async | slice: 0:8"
+    >
       <app-movie-card [movie]="movie"></app-movie-card>
     </div>
   </div>

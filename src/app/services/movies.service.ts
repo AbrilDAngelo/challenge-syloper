@@ -25,16 +25,18 @@ export class MoviesService {
   }
 
   // Petitions
-  getNowPlaying() {
+  getNowPlayingMovies() {
     // Fake query '?a=1' prevents first param from starting with '&'
     return this.executeQuery<ResponseTMDB>(`/movie/now_playing?a=1`);
   }
-  getMovieById(id: number) {
+  getPopularMovies() {
     // Fake query '?a=1' prevents first param from starting with '&'
+    return this.executeQuery<ResponseTMDB>(`/movie/popular?a=1`);
+  }
+  getMovieById(id: number) {
     return this.executeQuery<MovieDetails>(`/movie/${id}?a=1`);
   }
   getMovieCredits(id: number) {
-    // Fake query '?a=1' prevents first param from starting with '&'
     return this.executeQuery<Credits>(`/movie/${id}/credits?a=1`);
   }
   searchMovies(query: string) {

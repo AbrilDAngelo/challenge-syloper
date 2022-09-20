@@ -8,12 +8,41 @@
       </div>
       <div class="col-sm-12 col-md-6">
         <div class="search">
-          <input
-            type="text"
-            class="search-input"
-            placeholder="Busca una película..."
-          />
-          <button class="btn-search">Buscar</button>
+          <form (ngSubmit)="searchMovies()">
+            <input
+              name="searchQuery"
+              type="text"
+              autocomplete="off"
+              spellcheck="false"
+              class="search-input"
+              placeholder="Busca una película..."
+              [(ngModel)]="query"
+              (input)="keyPressed()"
+            />
+            <ng-container *ngIf="showSuggestions">
+              <div class="suggestions-container">
+                <ul class="list-group">
+                  <li
+                    *ngFor="let result of searchResults$ | async | slice: 0:6"
+                    class="list-group-item"
+                  >
+                    <a routerLink="/movie" (click)="selectMovie(result)">{{
+                      result.title
+                    }}</a>
+                  </li>
+                  <ng-container
+                    *ngIf="
+                      !(searchResults$ | async) ||
+                      (searchResults$ | async)?.length == 0
+                    "
+                  >
+                    <li>No se encontraron resultados</li>
+                  </ng-container>
+                </ul>
+              </div>
+            </ng-container>
+            <button type="submit" class="btn-search">Buscar</button>
+          </form>
         </div>
       </div>
     </div>
