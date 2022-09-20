@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { PipesModule } from '../pipes/pipes.module';
 import { RatingComponent } from './rating/rating.component';
 import { ActorCardComponent } from './actor-card/actor-card.component';
+import { SpinnerComponent } from './spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { ActorCardComponent } from './actor-card/actor-card.component';
     MovieResultCardComponent,
     NowPlayingCarouselSlideComponent,
     RatingComponent,
+    SpinnerComponent,
   ],
   imports: [CommonModule, RouterModule, PipesModule],
   exports: [
@@ -23,6 +25,7 @@ import { ActorCardComponent } from './actor-card/actor-card.component';
     MovieResultCardComponent,
     NowPlayingCarouselSlideComponent,
     RatingComponent,
+    SpinnerComponent,
   ],
 })
 export class ComponentsModule {}

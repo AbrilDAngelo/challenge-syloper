@@ -1,3 +1,12 @@
 <div class="container">
-  <h1>Buscar: {{ searchQuery }}</h1>
+  <div class="title-container">
+    <h2>
+      Buscar: <b>{{ searchQuery }}</b>
+    </h2>
+  </div>
+  <div class="row movies-container">
+    <div class="col-sm-6 col-md-3" *ngFor="let movie of searchResults">
+      <app-movie-card [movie]="movie"></app-movie-card>
+    </div>
+  </div>
 </div>

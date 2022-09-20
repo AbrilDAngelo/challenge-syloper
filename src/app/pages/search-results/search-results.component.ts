@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Movie } from '../../interfaces/tmdb.interface';
+import { MoviesService } from '../../services/movies.service';
 
 @Component({
   selector: 'app-search-results',
@@ -7,7 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchResultsComponent implements OnInit {
   searchQuery = 'Iron Man';
-  constructor() {}
+  searchResults: Movie[] = [];
+  constructor(private moviesService: MoviesService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.moviesService.searchMovies(this.searchQuery).subscribe((res) => {
+      this.searchResults = res.results.slice(0, 8);
+    });
+  }
 }
