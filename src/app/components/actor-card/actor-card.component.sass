@@ -1,0 +1,24 @@
+@use '../../common/_variables' as variables
+@use '../../common/_mixins' as mixins
+
+$width: inherit
+
+.actor-card
+    @include mixins.img-card
+    flex: 1
+
+.image-container
+    width: $width
+    text-align: center
+
+.image
+    width: 100%
+    height: 100%
+    object-fit: cover
+
+.actor-role
+    @include mixins.card-subtitle(variables.$color-text-dark)
+    margin-top: -0.5em
+
+.actor-info
+    padding-inline: 0.5em

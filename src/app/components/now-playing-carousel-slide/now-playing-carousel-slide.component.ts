@@ -1,4 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/interfaces/app-state.interface';
+import { Movie } from 'src/app/interfaces/tmdb.interface';
+import * as MovieActions from '../../store/movies.actions';
 
 @Component({
   selector: 'app-now-playing-carousel-slide',
@@ -6,11 +10,13 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./now-playing-carousel-slide.component.sass'],
 })
 export class NowPlayingCarouselSlideComponent implements OnInit {
-  @Input() backdropUrl!: string;
-  @Input() title!: string;
-  @Input() overview!: string;
-  @Input() active: string = ''
-  constructor() {}
+  @Input() movie!: Movie;
+  @Input() active!: string;
+  
+  constructor(private store: Store<AppState>) {}
 
   ngOnInit(): void {}
+  selectMovie() {
+    this.store.dispatch(MovieActions.setSelectedMovie({ movie: this.movie }));
+  }
 }

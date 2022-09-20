@@ -1,1 +1,49 @@
-<p>movie works!</p>
+<ng-container *ngIf="!movieDetails">
+  <div class="row">
+    <div class="col spinner-container text-center">
+      <div class="spinner-grow" role="status">
+        <span class="visually-hidden">Cargando...</span>
+      </div>
+    </div>
+  </div>
+</ng-container>
+<ng-container *ngIf="movieDetails">
+  <div
+    class="movie-main-info-container"
+    [ngStyle]="{
+      'background-image':
+        'linear-gradient(to right, #032541b1 50%, #01b3e4cb),
+        url(' +
+        (movieDetails.backdrop_path | image: 'w1280') +
+        ')'
+    }"
+  >
+    <div class="row">
+      <div class="col-md-3 col-sm-12">
+        <div class="poster-card">
+          <img
+            class="poster"
+            [src]="movieDetails.poster_path | image"
+            alt="name"
+          />
+        </div>
+      </div>
+      <div class="col-md-9 col-sm-12 movie-info">
+        <h2>{{ movieDetails.title }}</h2>
+        <app-rating [movieRating]="movieDetails.vote_average"></app-rating>
+        <h5>{{ movieDetails.overview }}</h5>
+        <button class="btn-back" (click)="goBack()">Regresar</button>
+      </div>
+    </div>
+  </div>
+</ng-container>
+<ng-container *ngIf="cast">
+  <div class="movie-cast-container">
+    <h5>Reparto principal</h5>
+    <div class="row">
+      <div class="col-md-2 col-sm-6" *ngFor="let actor of cast">
+        <app-actor-card [actor]="actor"></app-actor-card>
+      </div>
+    </div>
+  </div>
+</ng-container>

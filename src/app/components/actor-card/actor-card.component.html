@@ -1,0 +1,15 @@
+<div class="card-container">
+  <div class="actor-card">
+    <div class="image-container">
+      <img
+        class="image"
+        [src]="actor.profile_path ? (actor.profile_path | image: 'w600_and_h900_bestv2') : noImgUrl"
+        alt="name"
+      />
+    </div>
+    <div class="actor-info">
+      <span class="card-title">{{ actor.name }}</span>
+      <span class="actor-role">{{ actor.character }}</span>
+    </div>
+  </div>
+</div>

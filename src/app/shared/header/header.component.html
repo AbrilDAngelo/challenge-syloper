@@ -2,12 +2,18 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-12 col-md-6 text-md-start text-center logo">
-        <img src="../../../assets/logo-app.png" alt="" />
+        <a class="logo" routerLink="/" routerLinkActive="router-link-active">
+          <img src="../../../assets/logo-app.png" />
+        </a>
       </div>
       <div class="col-sm-12 col-md-6">
         <div class="search">
-          <input type="text" class="search-input" placeholder="Busca una película..."/>
-          <button class="search-button">Buscar</button>
+          <input
+            type="text"
+            class="search-input"
+            placeholder="Busca una película..."
+          />
+          <button class="btn-search">Buscar</button>
         </div>
       </div>
     </div>

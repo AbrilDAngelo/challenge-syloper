@@ -1,0 +1,39 @@
+@use '../../common/_mixins' as mixins
+@use '../../common/_variables' as variables
+
+.poster-card
+    @include mixins.img-card
+
+.poster
+    width: 100%
+    height: 100%
+    object-fit: cover
+
+.movie-main-info-container
+    background-size: cover
+
+.movie-main-info-container, .movie-cast-container
+    padding: 2em 3em
+
+.movie-info
+    color: variables.$color-text-light
+    margin-top: 2em
+
+.btn-back
+    @include mixins.btn-small
+    margin-top: 1em
+
+.spinner-container
+    padding: 5em
+
+.spinner-grow
+    width: 10em
+    height: 10em
+    color: variables.$color-background-primary
+
+h2
+    font-weight: 700
+
+h5
+    font-weight: 700
+    margin-bottom: 1em

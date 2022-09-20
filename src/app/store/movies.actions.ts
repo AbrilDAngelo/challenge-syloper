@@ -1,13 +1,15 @@
 import { createAction, props } from '@ngrx/store';
 import { Movie } from '../interfaces/tmdb.interface';
 
-export const loadMovies = createAction('[Movies] Load Movies');
-export const loadMoviesSuccess = createAction(
-  '[Movies] Load movies success',
+export const loadNowPlayingMovies = createAction(
+  '[Movies] Load now playing movies'
+);
+export const loadNowPlayingMoviesSuccess = createAction(
+  '[Movies] Load now playing movies success',
   props<{ movies: Movie[] }>()
 );
-export const loadMoviesFailure = createAction(
-  '[Movies] Load movies failure',
+export const loadNowPlayingMoviesFailure = createAction(
+  '[Movies] Load now playing movies failure',
   props<{ error: string }>()
 );
 export const setSelectedMovie = createAction(

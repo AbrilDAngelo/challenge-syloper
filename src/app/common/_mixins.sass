@@ -1,16 +1,23 @@
 // _mixins.sass
-@mixin carousel-card
+@use '../common/_variables' as variables
+
+@mixin img-card
     border-radius: 8px
     box-shadow: 0 2px 8px rgb(0 0 0 / 10%)
-    margin-top: 0.625em
-    margin-bottom: 0.625em
-    margin-left: 0.625em
-    margin-right: 0.625em
     overflow: hidden
 
-@mixin carousel-card-subtitle($text-color)
-    padding-top: 0.5em
+@mixin card-subtitle($text-color)
     display: block
     font-weight: 400
     font-size: 0.9em
     color: $text-color
+    margin-bottom: 1em
+
+@mixin btn-small
+    padding-inline: 1.5em
+    height: 2.5em
+    border-radius: 5em
+    color: variables.$color-text-light
+    background: linear-gradient(to right, #1ed5a9, #01b4e4)
+    font-weight: 600
+    border: none

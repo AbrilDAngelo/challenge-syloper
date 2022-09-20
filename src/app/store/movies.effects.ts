@@ -6,16 +6,20 @@ import * as MoviesActions from './movies.actions';
 
 @Injectable()
 export class MoviesEffects {
-  loadMovies$ = createEffect(() =>
+  loadNowPlayingMovies$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(MoviesActions.loadMovies),
+      ofType(MoviesActions.loadNowPlayingMovies),
       mergeMap(() => {
         return this.moviesService.getNowPlaying().pipe(
           map((res) =>
-            MoviesActions.loadMoviesSuccess({ movies: res.results })
+            MoviesActions.loadNowPlayingMoviesSuccess({ movies: res.results })
           ),
           catchError((error) =>
-            of(MoviesActions.loadMoviesFailure({ error: error.message }))
+            of(
+              MoviesActions.loadNowPlayingMoviesFailure({
+                error: error.message,
+              })
+            )
           )
         );
       })

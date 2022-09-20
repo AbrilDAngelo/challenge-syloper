@@ -1,7 +1,23 @@
 <div class="carousel-item" [ngClass]="active">
-  <img [src]="backdropUrl" class="d-block w-100" alt="title" />
+  <a
+    routerLink="/movie"
+    routerLinkActive="router-link-active"
+    (click)="selectMovie()"
+  >
+    <img
+      [src]="movie.backdrop_path | image: 'w1280'"
+      class="d-block w-100"
+      alt="movie.title"
+    />
+  </a>
   <div class="carousel-caption d-none d-md-block">
-    <h3>{{ title }}</h3>
-    <h5>{{overview}}...</h5>
+    <a
+      routerLink="/movie"
+      routerLinkActive="router-link-active"
+      (click)="selectMovie()"
+    >
+      <h3>{{ movie.title }}</h3>
+    </a>
+    <h5>{{ movie.overview }}...</h5>
   </div>
 </div>

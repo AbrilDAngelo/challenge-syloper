@@ -11,13 +11,13 @@ export const initialState: MoviesState = {
 
 export const reducers = createReducer(
   initialState,
-  on(MoviesActions.loadMovies, (state) => ({ ...state, isLoading: true })),
-  on(MoviesActions.loadMoviesSuccess, (state, action) => ({
+  on(MoviesActions.loadNowPlayingMovies, (state) => ({ ...state, isLoading: true })),
+  on(MoviesActions.loadNowPlayingMoviesSuccess, (state, action) => ({
     ...state,
     isLoading: false,
     movies: action.movies,
   })),
-  on(MoviesActions.loadMoviesFailure, (state, action) => ({
+  on(MoviesActions.loadNowPlayingMoviesFailure, (state, action) => ({
     ...state,
     isLoading: false,
     error: action.error,

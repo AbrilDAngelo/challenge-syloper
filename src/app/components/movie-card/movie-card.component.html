@@ -1,9 +1,17 @@
 <div class="card-container">
   <div class="movie-card">
-    <img class="poster" [src]="posterUrl" alt="name" />
+    <a
+      routerLink="/movie"
+      routerLinkActive="router-link-active"
+      (click)="selectMovie()"
+    >
+      <img class="poster" [src]="movie.poster_path | image" alt="name" />
+    </a>
   </div>
   <div class="movie-info">
-    <span class="card-title">{{ title }}</span>
+    <a routerLink="/movie"
+      ><span class="card-title">{{ movie.title }}</span></a
+    >
     <ng-container
       *ngFor="let item of [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]; let i = index"
     >

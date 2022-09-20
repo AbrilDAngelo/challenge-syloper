@@ -18,7 +18,7 @@ export const errorSelector = createSelector(
   (state) => state.error
 );
 
-export const selectedMovie = createSelector(
+export const selectedMovieSelector = createSelector(
   selectFeature,
   (state) => state.selectedMovie
 );

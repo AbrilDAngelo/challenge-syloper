@@ -27,6 +27,6 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(actions.loadMovies());
+    this.store.dispatch(actions.loadNowPlayingMovies());
   }
 }
