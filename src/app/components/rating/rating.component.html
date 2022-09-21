@@ -1,13 +1,17 @@
-<ng-container
-  *ngFor="let item of [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]; let i = index"
->
-  <i
-    class="bi bi-star-fill star-icon"
-    [ngClass]="{
-      'star-icon-checked-good': ratingInt > i && ratingInt >= 7,
-      'star-icon-checked-fair':
-        ratingInt > i && ratingInt >= 4 && ratingInt < 7,
-      'star-icon-checked-bad': ratingInt > i && ratingInt < 4
-    }"
-  ></i>
-</ng-container>
+<div class="row">
+  <div class="col">
+    <ng-container
+      *ngFor="let item of [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]; let i = index"
+    >
+      <i
+        class="bi bi-star-fill star-icon"
+        [ngClass]="{
+          'star-icon-checked-good': ratingInt > i && ratingInt >= 7,
+          'star-icon-checked-fair':
+            ratingInt > i && ratingInt >= 4 && ratingInt < 7,
+          'star-icon-checked-bad': ratingInt > i && ratingInt < 4
+        }"
+      ></i>
+    </ng-container>
+  </div>
+</div>

@@ -3,12 +3,12 @@ import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AppState } from 'src/app/interfaces/app-state.interface';
 import { Movie } from '../../interfaces/tmdb.interface';
-import * as MovieActions from '../../store/movies.actions';
+import * as searchActions from '../../store/actions/search.actions';
 import { ActivatedRoute } from '@angular/router';
 import {
-  searchResultsMoviesSelector,
-  isLoadingSearchResultsSelector,
-} from '../../store/movies.selectors';
+  isLoadingSelector as isLoadingSearchResultsSelector,
+  entitiesSelector as searchResultsSelector,
+} from 'src/app/store/selectors/search.selectors';
 
 @Component({
   selector: 'app-search-results',
@@ -17,7 +17,7 @@ import {
 })
 export class SearchResultsComponent implements OnInit {
   // Observables
-  searchResults$: Observable<Movie[]>;
+  searchResults$: Observable<Movie[] | null>;
   isLoadingSearchResults$: Observable<boolean>;
 
   searchQuery!: string;
@@ -27,10 +27,10 @@ export class SearchResultsComponent implements OnInit {
     private store: Store<AppState>,
     private activatedRoute: ActivatedRoute
   ) {
-    this.searchResults$ = this.store.pipe(select(searchResultsMoviesSelector));
     this.isLoadingSearchResults$ = this.store.pipe(
       select(isLoadingSearchResultsSelector)
     );
+    this.searchResults$ = this.store.pipe(select(searchResultsSelector));
   }
 
   ngOnInit(): void {
@@ -43,7 +43,7 @@ export class SearchResultsComponent implements OnInit {
       }
       // Carga de resultados
       this.store.dispatch(
-        MovieActions.loadSearchResults({ searchQuery: this.searchQuery })
+        searchActions.loadSearchResults({ searchQuery: this.searchQuery })
       );
     });
   }

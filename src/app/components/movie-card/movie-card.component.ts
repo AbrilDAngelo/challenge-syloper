@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/interfaces/app-state.interface';
-import * as MovieActions from '../../store/movies.actions';
 import { Movie } from '../../interfaces/tmdb.interface';
 
 @Component({
@@ -18,8 +17,4 @@ export class MovieCardComponent implements OnInit {
   constructor(private store: Store<AppState>) {}
 
   ngOnInit(): void {}
-  selectMovie() {
-    // Seteo de película seleccionada
-    this.store.dispatch(MovieActions.setSelectedMovie({ movie: this.movie }));
-  }
 }

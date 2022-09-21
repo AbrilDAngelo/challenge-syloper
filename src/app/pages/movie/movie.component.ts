@@ -2,18 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { AppState } from 'src/app/interfaces/app-state.interface';
 import { Observable } from 'rxjs';
-import {
-  selectedMovieDetailsSelector,
-  selectedMovieCreditsSelector,
-} from '../../store/movies.selectors';
 import { MovieDetails, Credits } from '../../interfaces/tmdb.interface';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import * as MovieActions from '../../store/movies.actions';
 import {
-  isLoadingSelectedDetailsSelector,
-  isLoadingSelectedCreditsSelector,
-} from '../../store/movies.selectors';
+  isLoadingSelector as isLoadingMovieDetailsSelector,
+  entitiesSelector as movieDetailsSelector,
+} from 'src/app/store/selectors/movie-details.selectors';
+import {
+  isLoadingSelector as isLoadingMovieCreditsSelector,
+  entitiesSelector as movieCreditsSelector,
+} from 'src/app/store/selectors/movie-credits.selectors';
+import * as movieDetailsActions from '../../store/actions/movie-details.actions';
+import * as movieCreditsActions from '../../store/actions/movie-credits.actions';
 
 @Component({
   selector: 'app-movie',
@@ -24,12 +25,10 @@ export class MovieComponent implements OnInit {
   // Observables
   isLoadingSelectedMovieDetails$: Observable<boolean>;
   isLoadingSelectedMovieCredits$: Observable<boolean>;
-  selectedMovieDetails$: Observable<MovieDetails | null>;
-  selectedMovieCredits$: Observable<Credits | null>;
+  movieDetails$: Observable<MovieDetails | null>;
+  movieCredits$: Observable<Credits | null>;
 
   movieId!: number;
-  // Fallback imagen de perfil
-  noImgUrl = '../../../../assets/no-poster.jpg';
 
   // Inyección de dependencias e inicialización de observables
   constructor(
@@ -38,17 +37,13 @@ export class MovieComponent implements OnInit {
     private activatedRoute: ActivatedRoute
   ) {
     this.isLoadingSelectedMovieDetails$ = this.store.pipe(
-      select(isLoadingSelectedDetailsSelector)
+      select(isLoadingMovieDetailsSelector)
     );
     this.isLoadingSelectedMovieCredits$ = this.store.pipe(
-      select(isLoadingSelectedCreditsSelector)
+      select(isLoadingMovieCreditsSelector)
     );
-    this.selectedMovieDetails$ = this.store.pipe(
-      select(selectedMovieDetailsSelector)
-    );
-    this.selectedMovieCredits$ = this.store.pipe(
-      select(selectedMovieCreditsSelector)
-    );
+    this.movieDetails$ = this.store.pipe(select(movieDetailsSelector));
+    this.movieCredits$ = this.store.pipe(select(movieCreditsSelector));
   }
 
   ngOnInit(): void {
@@ -57,11 +52,11 @@ export class MovieComponent implements OnInit {
       this.movieId = params['id'];
       // Carga de detalles de película
       this.store.dispatch(
-        MovieActions.loadSelectedMovieDetails({ movieId: this.movieId })
+        movieDetailsActions.loadMovieDetails({ movieId: this.movieId })
       );
       // Carga de credits de película
       this.store.dispatch(
-        MovieActions.loadSelectedMovieCredits({ movieId: this.movieId })
+        movieCreditsActions.loadMovieCredits({ movieId: this.movieId })
       );
     });
   }

@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/interfaces/app-state.interface';
 import { Movie } from 'src/app/interfaces/tmdb.interface';
-import * as MovieActions from '../../store/movies.actions';
+import * as actions from '../../store/actions/movie-details.actions';
 
 @Component({
   selector: 'app-now-playing-carousel-slide',
@@ -16,8 +16,4 @@ export class NowPlayingCarouselSlideComponent implements OnInit {
   constructor(private store: Store<AppState>) {}
 
   ngOnInit(): void {}
-  // Seteo de película seleccionada
-  selectMovie() {
-    this.store.dispatch(MovieActions.setSelectedMovie({ movie: this.movie }));
-  }
 }

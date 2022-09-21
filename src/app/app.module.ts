@@ -13,8 +13,18 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { PagesModule } from './pages/pages.module';
 import { SharedModule } from './shared/shared.module';
 import { environment } from '../environments/environment';
-import { reducers } from './store/movies.reducers';
-import { MoviesEffects } from './store/movies.effects';
+// Reducers
+import { movieCreditsReducer } from './store/reducers/movie-credits.reducer';
+import { movieDetailsReducer } from './store/reducers/movie-details.reducer';
+import { nowPlayingMoviesReducer } from './store/reducers/now-playing-movies.reducer';
+import { popularMoviesReducer } from './store/reducers/popular-movies.reducer';
+import { searchReducer } from './store/reducers/search.reducer';
+// Effects
+import { MovieCreditsEffects } from './store/effects/movie-credits.effects';
+import { MovieDetailsEffects } from './store/effects/movie-details.effects';
+import { NowPlayingMoviesEffects } from './store/effects/now-playing-movies.effects';
+import { PopularMoviesEffects } from './store/effects/popular-movies.effects';
+import { SearchEffects } from './store/effects/search.effects';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,8 +34,21 @@ import { MoviesEffects } from './store/movies.effects';
     PagesModule,
     SharedModule,
     HttpClientModule,
-    StoreModule.forRoot({ reducers }, {}),
-    EffectsModule.forRoot([MoviesEffects]),
+    StoreModule.forRoot({}),
+    // Reducers
+    StoreModule.forFeature('movieCredits', movieCreditsReducer),
+    StoreModule.forFeature('movieDetails', movieDetailsReducer),
+    StoreModule.forFeature('nowPlayingMovies', nowPlayingMoviesReducer),
+    StoreModule.forFeature('popularMovies', popularMoviesReducer),
+    StoreModule.forFeature('searchResults', searchReducer),
+    // Effects
+    EffectsModule.forRoot([
+      MovieCreditsEffects,
+      MovieDetailsEffects,
+      NowPlayingMoviesEffects,
+      PopularMoviesEffects,
+      SearchEffects,
+    ]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,

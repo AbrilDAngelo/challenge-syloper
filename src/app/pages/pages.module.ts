@@ -5,11 +5,15 @@ import { MovieComponent } from './movie/movie.component';
 import { SearchResultsComponent } from './search-results/search-results.component';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
-import { reducers } from '../store/movies.reducers';
-import { MoviesEffects } from '../store/movies.effects';
 import { ComponentsModule } from '../components/components.module';
 import { PipesModule } from '../pipes/pipes.module';
 import { RouterModule } from '@angular/router';
+import { NowPlayingMoviesEffects } from '../store/effects/now-playing-movies.effects';
+import { PopularMoviesEffects } from '../store/effects/popular-movies.effects';
+import { MovieCreditsEffects } from '../store/effects/movie-credits.effects';
+import { MovieDetailsEffects } from '../store/effects/movie-details.effects';
+import { SearchEffects } from '../store/effects/search.effects';
+import { nowPlayingMoviesReducer } from '../store/reducers/now-playing-movies.reducer';
 
 @NgModule({
   declarations: [HomeComponent, MovieComponent, SearchResultsComponent],
@@ -18,8 +22,14 @@ import { RouterModule } from '@angular/router';
     ComponentsModule,
     RouterModule,
     PipesModule,
-    StoreModule.forFeature('movies', reducers),
-    EffectsModule.forFeature([MoviesEffects]),
+    StoreModule.forFeature('movies', nowPlayingMoviesReducer),
+    EffectsModule.forFeature([
+      MovieCreditsEffects,
+      MovieDetailsEffects,
+      NowPlayingMoviesEffects,
+      PopularMoviesEffects,
+      SearchEffects,
+    ]),
   ],
 })
 export class PagesModule {}

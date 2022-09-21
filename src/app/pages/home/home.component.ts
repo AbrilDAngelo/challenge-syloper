@@ -2,16 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Movie } from 'src/app/interfaces/tmdb.interface';
+import {
+  isLoadingSelector as isLoadingNowPlayingMoviesSelector,
+  entitiesSelector as nowPlayingMoviesSelector,
+} from 'src/app/store/selectors/now-playing-movies.selectors';
+import {
+  isLoadingSelector as isLoadingPopularMoviesSelector,
+  entitiesSelector as popularMoviesSelector,
+} from 'src/app/store/selectors/popular-movies.selectors';
 import { AppState } from '../../interfaces/app-state.interface';
-import * as MovieActions from '../../store/movies.actions';
-import {
-  isLoadingPopularSelector,
-  nowPlayingMoviesSelector,
-  popularMoviesSelector,
-} from '../../store/movies.selectors';
-import {
-  isLoadingNowPlayingSelector,
-} from '../../store/movies.selectors';
+import * as nowPlayingMovieActions from '../../store/actions/now-playing-movies.actions';
+import * as popularMovieActions from '../../store/actions/popular-movies.actions';
 
 @Component({
   selector: 'app-home',
@@ -22,23 +23,23 @@ export class HomeComponent implements OnInit {
   // Observables
   isLoadingNowPlayingMovies$: Observable<boolean>;
   isLoadingPopularMovies$: Observable<boolean>;
-  nowPlayingMovies$: Observable<Movie[]>;
-  popularMovies$: Observable<Movie[]>;
+  nowPlayingMovies$: Observable<Movie[] | null>;
+  popularMovies$: Observable<Movie[] | null>;
 
   // Inyección de dependencias e inicialización de observables
   constructor(private store: Store<AppState>) {
     this.isLoadingNowPlayingMovies$ = this.store.pipe(
-      select(isLoadingNowPlayingSelector)
+      select(isLoadingNowPlayingMoviesSelector)
     );
     this.isLoadingPopularMovies$ = this.store.pipe(
-      select(isLoadingPopularSelector)
+      select(isLoadingPopularMoviesSelector)
     );
     this.nowPlayingMovies$ = this.store.pipe(select(nowPlayingMoviesSelector));
     this.popularMovies$ = this.store.pipe(select(popularMoviesSelector));
   }
 
   ngOnInit(): void {
-    this.store.dispatch(MovieActions.loadNowPlayingMovies());
-    this.store.dispatch(MovieActions.loadPopularMovies());
+    this.store.dispatch(nowPlayingMovieActions.loadNowPlayingMovies());
+    this.store.dispatch(popularMovieActions.loadPopularMovies());
   }
 }

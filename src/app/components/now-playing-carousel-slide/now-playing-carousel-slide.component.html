@@ -4,7 +4,6 @@
     routerLink="/movie"
     [queryParams]="{ id: movie.id }"
     routerLinkActive="router-link-active"
-    (click)="selectMovie()"
   >
     <img
       [src]="movie.backdrop_path | image: 'w1280':'backdrop'"
@@ -19,7 +18,6 @@
       routerLink="/movie"
       [queryParams]="{ id: movie.id }"
       routerLinkActive="router-link-active"
-      (click)="selectMovie()"
     >
       <h3>{{ movie.title }}</h3>
     </a>

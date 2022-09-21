@@ -21,8 +21,7 @@
       'background-image':
         'linear-gradient(to right, #032541b1 50%, #01b3e4cb),
         url(' +
-        ((selectedMovieDetails$ | async)!.backdrop_path
-          | image: 'w1280':'backdrop') +
+        ((movieDetails$ | async)!.backdrop_path | image: 'w1280':'backdrop') +
         ')'
     }"
   >
@@ -33,8 +32,7 @@
           <img
             class="poster"
             [src]="
-              (selectedMovieDetails$ | async)!.poster_path
-                | image: 'w780':'poster'
+              (movieDetails$ | async)!.poster_path | image: 'w780':'poster'
             "
             alt="name"
           />
@@ -42,13 +40,13 @@
         <!-- fin poster -->
       </div>
       <div class="col-md-9 col-sm-12 movie-info">
-        <h2>{{ (selectedMovieDetails$ | async)!.title }}</h2>
+        <h2>{{ (movieDetails$ | async)!.title }}</h2>
         <!-- inicio rating -->
         <app-rating
-          [movieRating]="(selectedMovieDetails$ | async)!.vote_average"
+          [movieRating]="(movieDetails$ | async)!.vote_average"
         ></app-rating>
         <!-- fin rating -->
-        <h5>{{ (selectedMovieDetails$ | async)!.overview }}</h5>
+        <h5>{{ (movieDetails$ | async)!.overview }}</h5>
         <button class="btn-back" routerLink="/">Regresar</button>
       </div>
     </div>
@@ -59,7 +57,7 @@
     <div class="row">
       <div
         class="col-md-2 col-sm-6"
-        *ngFor="let actor of (selectedMovieCredits$ | async)!.cast"
+        *ngFor="let actor of (movieCredits$ | async)!.cast | slice: 0:6"
       >
         <app-actor-card [actor]="actor"></app-actor-card>
       </div>

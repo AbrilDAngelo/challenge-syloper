@@ -3,9 +3,12 @@ import { debounceTime, Observable, Subject } from 'rxjs';
 import { Movie } from '../../interfaces/tmdb.interface';
 import { select, Store } from '@ngrx/store';
 import { AppState } from 'src/app/interfaces/app-state.interface';
-import * as MovieActions from '../../store/movies.actions';
-import { searchResultsMoviesSelector } from '../../store/movies.selectors';
+import * as searchActions from '../../store/actions/search.actions';
 import { Router } from '@angular/router';
+import {
+  entitiesSelector as searchResultsSelector,
+  isLoadingSelector as isLoadingSearchResultsSelector,
+} from 'src/app/store/selectors/search.selectors';
 
 @Component({
   selector: 'app-header',
@@ -13,13 +16,19 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.sass'],
 })
 export class HeaderComponent implements OnInit {
+  // Observables
+  isLoadingSearchResults$: Observable<boolean>;
+  searchResults$: Observable<Movie[] | null>;
+
   query!: string;
   debouncer: Subject<string> = new Subject();
   showSuggestions: boolean = false;
-  searchResults$: Observable<Movie[]>;
 
   constructor(private store: Store<AppState>, private router: Router) {
-    this.searchResults$ = this.store.pipe(select(searchResultsMoviesSelector));
+    this.isLoadingSearchResults$ = this.store.pipe(
+      select(isLoadingSearchResultsSelector)
+    );
+    this.searchResults$ = this.store.pipe(select(searchResultsSelector));
   }
 
   ngOnInit(): void {
@@ -35,8 +44,9 @@ export class HeaderComponent implements OnInit {
       this.showSuggestions = false;
       return;
     }
+    console.log(this.query);
     this.store.dispatch(
-      MovieActions.loadSearchResults({ searchQuery: this.query })
+      searchActions.loadSearchResults({ searchQuery: this.query })
     );
     this.showSuggestions = true;
   }
@@ -46,13 +56,10 @@ export class HeaderComponent implements OnInit {
       return;
     }
     this.store.dispatch(
-      MovieActions.loadSearchResults({ searchQuery: this.query })
+      searchActions.loadSearchResults({ searchQuery: this.query })
     );
-    this.store.dispatch(
-      MovieActions.setSearchQuery({ searchQuery: this.query })
-    );
+    this.query = '';
     this.showSuggestions = false;
-    // this.router.navigateByUrl('/search');
     this.router.navigate(['/search'], {
       queryParams: { query: this.query },
     });
@@ -61,6 +68,5 @@ export class HeaderComponent implements OnInit {
   selectMovie(movie: Movie) {
     this.showSuggestions = false;
     this.query = '';
-    this.store.dispatch(MovieActions.setSelectedMovie({ movie: movie }));
   }
 }
