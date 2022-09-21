@@ -10,7 +10,6 @@ import {
   popularMoviesSelector,
 } from '../../store/movies.selectors';
 import {
-  errorSelector,
   isLoadingNowPlayingSelector,
 } from '../../store/movies.selectors';
 

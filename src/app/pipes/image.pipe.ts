@@ -11,16 +11,7 @@ export class ImagePipe implements PipeTransform {
     type: string = 'poster'
   ): string {
     if (!img) {
-      switch (type) {
-        case 'poster':
-          return '../../../assets/no-image-banner.png';
-        case 'backdrop':
-          return '../../../assets/no-backdrop.jpg';
-        case 'profile':
-          return '../../../assets/no-profile-picture.jpg';
-        default:
-          return '../../../assets/no-image-banner.png';
-      }
+      return `../../../assets/no-${type}.jpg`;
     }
     const imgUrl = `${URL}/${size}/${img}`;
     return imgUrl;

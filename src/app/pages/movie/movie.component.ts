@@ -32,7 +32,7 @@ export class MovieComponent implements OnInit {
   cast!: Cast[];
   movieId!: number;
   // Fallback imagen de perfil
-  noImgUrl = '../../../../assets/no-image-banner.png';
+  noImgUrl = '../../../../assets/no-poster.jpg';
 
   // Inyección de dependencias e inicialización de observables
   constructor(
