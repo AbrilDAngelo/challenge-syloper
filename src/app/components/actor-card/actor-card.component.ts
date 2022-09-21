@@ -8,8 +8,6 @@ import { Cast } from '../../interfaces/tmdb.interface';
 })
 export class ActorCardComponent implements OnInit {
   @Input() actor!: Cast;
-  // Fallback url de imagen
-  noImgUrl = '../../../../assets/no-profile.jpg';
   constructor() {}
 
   ngOnInit(): void {}

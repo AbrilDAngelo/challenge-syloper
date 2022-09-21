@@ -49,6 +49,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // Carga de películas en cartelera y populares
     this.store.dispatch(nowPlayingMovieActions.loadNowPlayingMovies());
     this.store.dispatch(popularMovieActions.loadPopularMovies());
   }

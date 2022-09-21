@@ -14,23 +14,22 @@ const apiKey = environment.apiKey;
   providedIn: 'root',
 })
 export class MoviesService {
-  // Dependency injections
+  // Inyección de dependencias
   constructor(private http: HttpClient) {}
 
-  // Callback function for setting api_key & language queries
+  // Callback para setear api_key & language queries
   private executeQuery<T>(query: string) {
     query = URL + query;
     query += `&api_key=${apiKey}&language=es`;
     return this.http.get<T>(query);
   }
 
-  // Petitions
+  // Peticiones
   getNowPlayingMovies() {
-    // Fake query '?a=1' prevents first param from starting with '&'
+    // Query trivial '?a=1' evita que el primer param inicie con '&' al concatenar
     return this.executeQuery<ResponseTMDB>(`/movie/now_playing?a=1`);
   }
   getPopularMovies() {
-    // Fake query '?a=1' prevents first param from starting with '&'
     return this.executeQuery<ResponseTMDB>(`/movie/popular?a=1`);
   }
   getMovieById(id: number) {

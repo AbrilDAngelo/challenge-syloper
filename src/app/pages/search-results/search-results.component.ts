@@ -47,7 +47,7 @@ export class SearchResultsComponent implements OnInit {
       } else {
         this.searchQuery = params['query'];
       }
-      // Carga de resultados (permite compartir el link de búsqueda)
+      // Carga de resultados
       this.store.dispatch(
         searchActions.loadSearchResults({ searchQuery: this.searchQuery })
       );
