@@ -20,12 +20,13 @@ import {
   styleUrls: ['./home.component.sass'],
 })
 export class HomeComponent implements OnInit {
+  // Observables
   isLoadingNowPlayingMovies$: Observable<boolean>;
   isLoadingPopularMovies$: Observable<boolean>;
-  error$: Observable<string | null>;
   nowPlayingMovies$: Observable<Movie[]>;
   popularMovies$: Observable<Movie[]>;
 
+  // Inyección de dependencias e inicialización de observables
   constructor(private store: Store<AppState>) {
     this.isLoadingNowPlayingMovies$ = this.store.pipe(
       select(isLoadingNowPlayingSelector)
@@ -33,7 +34,6 @@ export class HomeComponent implements OnInit {
     this.isLoadingPopularMovies$ = this.store.pipe(
       select(isLoadingPopularSelector)
     );
-    this.error$ = this.store.pipe(select(errorSelector));
     this.nowPlayingMovies$ = this.store.pipe(select(nowPlayingMoviesSelector));
     this.popularMovies$ = this.store.pipe(select(popularMoviesSelector));
   }

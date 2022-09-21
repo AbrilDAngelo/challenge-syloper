@@ -1,5 +1,10 @@
+<!-- inicio loading spinner -->
+<ng-container *ngIf="!selectedMovieDetails && !cast">
+  <app-spinner></app-spinner>
+</ng-container>
+<!-- fin loading spinner -->
 <!-- inicio sección info de película -->
-<ng-container *ngIf="selectedMovieDetails">
+<ng-container *ngIf="selectedMovieDetails && cast">
   <div
     class="movie-main-info-container"
     [ngStyle]="{
@@ -38,10 +43,8 @@
       </div>
     </div>
   </div>
-</ng-container>
-<!-- fin sección info de película -->
-<!-- inicio sección cast -->
-<ng-container *ngIf="cast">
+  <!-- fin sección info de película -->
+  <!-- inicio sección cast -->
   <div class="movie-cast-container">
     <div class="row">
       <div class="col-md-2 col-sm-6" *ngFor="let actor of cast">

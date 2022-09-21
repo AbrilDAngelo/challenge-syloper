@@ -1,67 +1,73 @@
 <!-- inicio loading spinner -->
 <ng-container
   *ngIf="
-    (isLoadingNowPlayingMovies$ | async) || (isLoadingPopularMovies$ | async)
+    (isLoadingNowPlayingMovies$ | async) && (isLoadingPopularMovies$ | async)
   "
 >
   <app-spinner></app-spinner>
 </ng-container>
 <!-- fin loading spinner -->
 <!-- inicio sección cartelera -->
-<div class="container">
-  <div class="div" class="now-playing-container">
-    <h1>Cartelera</h1>
-    <!-- inicio carrusel cartelera -->
-    <div
-      id="nowPlayingCarousel"
-      class="carousel slide"
-      data-bs-ride="carousel"
-      data-interval="2000"
-    >
-      <div class="carousel-inner">
-        <app-now-playing-carousel-slide
-          [movie]="(nowPlayingMovies$ | async)![0]"
-          active="active"
-        ></app-now-playing-carousel-slide>
-        <ng-container
-          *ngFor="let movie of nowPlayingMovies$ | async | slice: 1"
-        >
+<ng-container
+  *ngIf="
+    !(isLoadingNowPlayingMovies$ | async) && !(isLoadingPopularMovies$ | async)
+  "
+>
+  <div class="container">
+    <div class="div" class="now-playing-container">
+      <h1>Cartelera</h1>
+      <!-- inicio carrusel cartelera -->
+      <div
+        id="nowPlayingCarousel"
+        class="carousel slide"
+        data-bs-ride="carousel"
+        data-interval="2000"
+      >
+        <div class="carousel-inner">
           <app-now-playing-carousel-slide
-            [movie]="movie"
+            [movie]="(nowPlayingMovies$ | async)![0]"
+            active="active"
           ></app-now-playing-carousel-slide>
-        </ng-container>
+          <ng-container
+            *ngFor="let movie of nowPlayingMovies$ | async | slice: 1"
+          >
+            <app-now-playing-carousel-slide
+              [movie]="movie"
+            ></app-now-playing-carousel-slide>
+          </ng-container>
+        </div>
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#nowPlayingCarousel"
+          data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#nowPlayingCarousel"
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
       </div>
-      <button
-        class="carousel-control-prev"
-        type="button"
-        data-bs-target="#nowPlayingCarousel"
-        data-bs-slide="prev"
-      >
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button
-        class="carousel-control-next"
-        type="button"
-        data-bs-target="#nowPlayingCarousel"
-        data-bs-slide="next"
-      >
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
+      <!-- fin carrusel cartelera -->
     </div>
-    <!-- fin carrusel cartelera -->
-  </div>
-  <h3>Películas</h3>
-  <!-- inicio sección de películas populares -->
-  <div class="row movies-container">
-    <div
-      class="col-sm-6 col-md-3 flex-card-container"
-      *ngFor="let movie of popularMovies$ | async | slice: 0:8"
-    >
-      <app-movie-card [movie]="movie"></app-movie-card>
+    <h3>Películas</h3>
+    <!-- inicio sección de películas populares -->
+    <div class="row movies-container">
+      <div
+        class="col-sm-6 col-md-3 flex-card-container"
+        *ngFor="let movie of popularMovies$ | async | slice: 0:8"
+      >
+        <app-movie-card [movie]="movie"></app-movie-card>
+      </div>
     </div>
+    <!-- fin sección de películas populares -->
   </div>
-  <!-- fin sección de películas populares -->
-</div>
-<!-- fin sección cartelera -->
+  <!-- fin sección cartelera -->
+</ng-container>

@@ -14,12 +14,12 @@ export class MovieCardComponent implements OnInit {
 
   ratingInt!: number;
   maxRating = 10;
+  // Inyección de dependencias
   constructor(private store: Store<AppState>) {}
 
-  ngOnInit(): void {
-    this.ratingInt = Math.round(this.movie.vote_average);
-  }
+  ngOnInit(): void {}
   selectMovie() {
+    // Seteo de película seleccionada
     this.store.dispatch(MovieActions.setSelectedMovie({ movie: this.movie }));
   }
 }

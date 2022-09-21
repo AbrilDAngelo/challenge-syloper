@@ -8,10 +8,12 @@ import { Component, Input, OnInit } from '@angular/core';
 export class RatingComponent implements OnInit {
   @Input() movieRating!: number;
   ratingInt!: number;
+  // Máxima puntuación
   maxRating = 10;
   constructor() {}
 
   ngOnInit(): void {
+    // Aproximación del rating al entero más próximo
     this.ratingInt = Math.round(this.movieRating);
   }
 }

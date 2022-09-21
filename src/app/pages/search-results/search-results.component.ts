@@ -13,9 +13,13 @@ import { searchResultsMoviesSelector } from '../../store/movies.selectors';
   styleUrls: ['./search-results.component.sass'],
 })
 export class SearchResultsComponent implements OnInit {
-  searchQuery!: string;
+  // Observables
   searchResults$: Observable<Movie[]>;
+
+  searchQuery!: string;
   searchResults!: Movie[];
+
+  // Inyección de dependencias e inicialización de observables
   constructor(
     private store: Store<AppState>,
     private activatedRoute: ActivatedRoute
@@ -24,18 +28,22 @@ export class SearchResultsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // Obtención del searchQuery de query params
     this.activatedRoute.queryParams.subscribe((params) => {
       if (!params['query']) {
         this.searchQuery = '';
       } else {
         this.searchQuery = params['query'];
       }
+      // Carga de resultados
       this.store.dispatch(
         MovieActions.loadSearchResults({ searchQuery: this.searchQuery })
       );
+      // Suscripción a observable para solucionar error de 'object is possibly null' en template
       this.searchResults$.subscribe((res) => {
         if (res !== null) {
-          this.searchResults = res.slice(0,8);
+          // Mostrar los primeros 8 resultados
+          this.searchResults = res.slice(0, 8);
         }
       });
     });

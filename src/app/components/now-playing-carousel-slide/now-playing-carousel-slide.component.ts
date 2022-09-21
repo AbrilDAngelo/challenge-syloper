@@ -12,10 +12,11 @@ import * as MovieActions from '../../store/movies.actions';
 export class NowPlayingCarouselSlideComponent implements OnInit {
   @Input() movie!: Movie;
   @Input() active!: string;
-  
+  // Inyección de dependencias
   constructor(private store: Store<AppState>) {}
 
   ngOnInit(): void {}
+  // Seteo de película seleccionada
   selectMovie() {
     this.store.dispatch(MovieActions.setSelectedMovie({ movie: this.movie }));
   }

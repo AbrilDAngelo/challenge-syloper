@@ -23,6 +23,10 @@ export const isLoadingSelectedDetailsSelector = createSelector(
   selectFeature,
   (state) => state.isLoadingSelectedMovieDetails
 );
+export const isLoadingSelectedCreditsSelector = createSelector(
+  selectFeature,
+  (state) => state.isLoadingSelectedMovieCredits
+);
 // Now playing
 export const nowPlayingMoviesSelector = createSelector(
   selectFeature,
