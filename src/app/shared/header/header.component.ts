@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { debounceTime, Observable, Subject } from 'rxjs';
-import { MoviesService } from '../../services/movies.service';
 import { Movie } from '../../interfaces/tmdb.interface';
 import { select, Store } from '@ngrx/store';
 import { AppState } from 'src/app/interfaces/app-state.interface';
