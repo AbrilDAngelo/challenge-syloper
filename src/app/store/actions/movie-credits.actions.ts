@@ -2,14 +2,14 @@ import { createAction, props } from '@ngrx/store';
 import { Credits } from 'src/app/interfaces/tmdb.interface';
 
 export const loadMovieCredits = createAction(
-  '[Movies] Load movie credits',
+  '[Movie Credits] Load credits',
   props<{ movieId: number }>()
 );
 export const loadMovieCreditsSuccess = createAction(
-  '[Movies] Load movie credits success',
+  '[Movie Credits] Load credits success',
   props<{ entities: Credits }>()
 );
 export const loadMovieCreditsFailure = createAction(
-  '[Movies] Load movie credits failure',
+  '[Movie Credits] Load credits failure',
   props<{ error: string }>()
 );

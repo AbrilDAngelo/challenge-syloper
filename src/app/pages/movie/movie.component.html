@@ -1,3 +1,11 @@
+<!-- inicio error alerts -->
+<ng-container *ngIf="movieDetailsError$ | async">
+  <app-error-alert [message]="(movieDetailsError$ | async)!"></app-error-alert>
+</ng-container>
+<ng-container *ngIf="movieCreditsError$ | async">
+  <app-error-alert [message]="(movieCreditsError$ | async)!"></app-error-alert>
+</ng-container>
+<!-- fin error alerts -->
 <!-- inicio loading spinner -->
 <ng-container
   *ngIf="
@@ -12,7 +20,9 @@
 <ng-container
   *ngIf="
     !(isLoadingSelectedMovieDetails$ | async) &&
-    !(isLoadingSelectedMovieCredits$ | async)
+    !(isLoadingSelectedMovieCredits$ | async) &&
+    !(movieCreditsError$ | async) &&
+    !(movieDetailsError$ | async)
   "
 >
   <div

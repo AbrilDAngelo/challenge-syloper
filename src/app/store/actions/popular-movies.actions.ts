@@ -3,10 +3,10 @@ import { Movie } from 'src/app/interfaces/tmdb.interface';
 
 export const loadPopularMovies = createAction('[Movies] Load popular movies');
 export const loadPopularMoviesSuccess = createAction(
-  '[Movies] Load popular movies success',
+  '[Popular Movies] Load movies success',
   props<{ entities: Movie[] }>()
 );
 export const loadPopularMoviesFailure = createAction(
-  '[Movies] Load popular movies failure',
+  '[Popular Movies] Load movies failure',
   props<{ error: string }>()
 );

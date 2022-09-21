@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostBinding, HostListener, OnInit } from '@angular/core';
 import { debounceTime, Observable, Subject } from 'rxjs';
 import { Movie } from '../../interfaces/tmdb.interface';
 import { select, Store } from '@ngrx/store';
@@ -6,8 +6,8 @@ import { AppState } from 'src/app/interfaces/app-state.interface';
 import * as searchActions from '../../store/actions/search.actions';
 import { Router } from '@angular/router';
 import {
-  entitiesSelector as searchResultsSelector,
-  isLoadingSelector as isLoadingSearchResultsSelector,
+  entitiesSuggestionsSelector,
+  isLoadingSuggestionsSelector,
 } from 'src/app/store/selectors/search.selectors';
 
 @Component({
@@ -17,23 +17,28 @@ import {
 })
 export class HeaderComponent implements OnInit {
   // Observables
-  isLoadingSearchResults$: Observable<boolean>;
-  searchResults$: Observable<Movie[] | null>;
+  isLoadingSearchSuggestions$: Observable<boolean>;
+  searchSuggestions$: Observable<Movie[] | null>;
 
   query!: string;
   debouncer: Subject<string> = new Subject();
   showSuggestions: boolean = false;
 
   constructor(private store: Store<AppState>, private router: Router) {
-    this.isLoadingSearchResults$ = this.store.pipe(
-      select(isLoadingSearchResultsSelector)
+    this.isLoadingSearchSuggestions$ = this.store.pipe(
+      select(isLoadingSuggestionsSelector)
     );
-    this.searchResults$ = this.store.pipe(select(searchResultsSelector));
+    this.searchSuggestions$ = this.store.pipe(
+      select(entitiesSuggestionsSelector)
+    );
   }
 
   ngOnInit(): void {
     this.debouncer.pipe(debounceTime(300)).subscribe(() => {
       this.searchSuggestions();
+      document
+        .getElementById('searchBox')
+        ?.addEventListener('blur', () => this.clearQuery());
     });
   }
   keyPressed() {
@@ -44,29 +49,25 @@ export class HeaderComponent implements OnInit {
       this.showSuggestions = false;
       return;
     }
-    console.log(this.query);
     this.store.dispatch(
-      searchActions.loadSearchResults({ searchQuery: this.query })
+      searchActions.loadSuggestions({ searchQuery: this.query })
     );
     this.showSuggestions = true;
   }
 
-  searchMovies() {
+  searchResults() {
     if (this.query.trim().length === 0) {
       return;
     }
-    this.store.dispatch(
-      searchActions.loadSearchResults({ searchQuery: this.query })
-    );
-    this.query = '';
-    this.showSuggestions = false;
     this.router.navigate(['/search'], {
       queryParams: { query: this.query },
     });
+    this.showSuggestions = false;
+    this.clearQuery();
   }
 
-  selectMovie(movie: Movie) {
-    this.showSuggestions = false;
+  clearQuery() {
+    console.log('Hola');
     this.query = '';
   }
 }

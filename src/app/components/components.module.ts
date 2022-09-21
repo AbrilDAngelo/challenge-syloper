@@ -7,6 +7,7 @@ import { PipesModule } from '../pipes/pipes.module';
 import { RatingComponent } from './rating/rating.component';
 import { ActorCardComponent } from './actor-card/actor-card.component';
 import { SpinnerComponent } from './spinner/spinner.component';
+import { ErrorAlertComponent } from './error-alert/error-alert.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { SpinnerComponent } from './spinner/spinner.component';
     NowPlayingCarouselSlideComponent,
     RatingComponent,
     SpinnerComponent,
+    ErrorAlertComponent,
   ],
   imports: [CommonModule, RouterModule, PipesModule],
   exports: [
@@ -23,6 +25,7 @@ import { SpinnerComponent } from './spinner/spinner.component';
     NowPlayingCarouselSlideComponent,
     RatingComponent,
     SpinnerComponent,
+    ErrorAlertComponent,
   ],
 })
 export class ComponentsModule {}

@@ -3,7 +3,14 @@
   <app-spinner></app-spinner>
 </ng-container>
 <!-- fin loading spinner -->
-<ng-container *ngIf="!(isLoadingSearchResults$ | async)">
+<!-- inicio error alerts -->
+<ng-container *ngIf="searchResultsError$ | async">
+  <app-error-alert [message]="(searchResultsError$ | async)!"></app-error-alert>
+</ng-container>
+<!-- fin error alerts -->
+<ng-container
+  *ngIf="!(isLoadingSearchResults$ | async) && !(searchResultsError$ | async)"
+>
   <div class="container">
     <div class="title-container">
       <h2>
@@ -22,7 +29,10 @@
     <!-- fin sección resultados -->
     <!-- inicio alerta not-found -->
     <ng-container
-      *ngIf="!(searchResults$ | async) || (searchResults$ | async)!.length == 0"
+      *ngIf="
+        (!(searchResults$ | async) || (searchResults$ | async)!.length == 0) &&
+        !(searchResultsError$ | async)
+      "
     >
       <h3>No hay resultados para la búsqueda</h3>
     </ng-container>

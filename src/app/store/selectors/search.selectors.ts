@@ -3,13 +3,21 @@ import { AppState } from '../../interfaces/app-state.interface';
 
 export const selectFeature = (state: AppState) => state.searchResults;
 
-export const isLoadingSelector = createSelector(
+export const isLoadingSuggestionsSelector = createSelector(
   selectFeature,
-  (state) => state.isLoading
+  (state) => state.isLoadingSuggestions
 );
-export const entitiesSelector = createSelector(
+export const isLoadingResultsSelector = createSelector(
   selectFeature,
-  (state) => state.entities
+  (state) => state.isLoadingResults
+);
+export const entitiesResultsSelector = createSelector(
+  selectFeature,
+  (state) => state.entitiesResults
+);
+export const entitiesSuggestionsSelector = createSelector(
+  selectFeature,
+  (state) => state.entitiesSuggestions
 );
 export const searchQuerySelector = createSelector(
   selectFeature,

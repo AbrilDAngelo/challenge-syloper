@@ -7,8 +7,13 @@
         </a>
       </div>
       <div class="col-sm-12 col-md-6">
-        <div class="search">
-          <form (ngSubmit)="searchMovies()">
+        <div
+          id="searchBox"
+          class="search"
+          tabindex="0"
+          (mouseleave)="showSuggestions = false"
+        >
+          <form (ngSubmit)="searchResults()">
             <input
               name="searchQuery"
               type="text"
@@ -18,25 +23,27 @@
               placeholder="Buscar película..."
               [(ngModel)]="query"
               (input)="keyPressed()"
+              (blur)="clearQuery()"
             />
             <ng-container *ngIf="showSuggestions">
               <div class="suggestions-container">
                 <ul class="list-group">
                   <li
-                    *ngFor="let result of searchResults$ | async | slice: 0:6"
+                    *ngFor="
+                      let suggestion of searchSuggestions$ | async | slice: 0:6
+                    "
                     class="list-group-item"
                   >
                     <a
                       routerLink="/movie"
-                      [queryParams]="{ id: result.id }"
-                      (click)="selectMovie(result)"
-                      >{{ result.title }}</a
+                      [queryParams]="{ id: suggestion.id }"
+                      >{{ suggestion.title }}</a
                     >
                   </li>
                   <ng-container
                     *ngIf="
-                      !(searchResults$ | async) ||
-                      (searchResults$ | async)?.length == 0
+                      !(searchSuggestions$ | async) ||
+                      (searchSuggestions$ | async)?.length == 0
                     "
                   >
                     <li class="list-group-item">

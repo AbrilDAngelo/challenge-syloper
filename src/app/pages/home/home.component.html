@@ -1,3 +1,13 @@
+<!-- inicio error alerts -->
+<ng-container *ngIf="nowPlayingMoviesError$ | async">
+  <app-error-alert
+    [message]="(nowPlayingMoviesError$ | async)!"
+  ></app-error-alert>
+</ng-container>
+<ng-container *ngIf="popularMoviesError$ | async">
+  <app-error-alert [message]="(popularMoviesError$ | async)!"></app-error-alert>
+</ng-container>
+<!-- fin error alerts -->
 <!-- inicio loading spinner -->
 <ng-container
   *ngIf="
@@ -10,7 +20,10 @@
 <!-- inicio sección cartelera -->
 <ng-container
   *ngIf="
-    !(isLoadingNowPlayingMovies$ | async) && !(isLoadingPopularMovies$ | async)
+    !(isLoadingNowPlayingMovies$ | async) &&
+    !(isLoadingPopularMovies$ | async) &&
+    !(nowPlayingMoviesError$ | async) &&
+    !(popularMoviesError$ | async)
   "
 >
   <div class="container">

@@ -6,8 +6,9 @@ import { Movie } from '../../interfaces/tmdb.interface';
 import * as searchActions from '../../store/actions/search.actions';
 import { ActivatedRoute } from '@angular/router';
 import {
-  isLoadingSelector as isLoadingSearchResultsSelector,
-  entitiesSelector as searchResultsSelector,
+  isLoadingResultsSelector,
+  entitiesResultsSelector,
+  errorSelector as searchResultsErrorSelector,
 } from 'src/app/store/selectors/search.selectors';
 
 @Component({
@@ -19,7 +20,9 @@ export class SearchResultsComponent implements OnInit {
   // Observables
   searchResults$: Observable<Movie[] | null>;
   isLoadingSearchResults$: Observable<boolean>;
+  searchResultsError$: Observable<string | null>;
 
+  searchResults!: Movie[] | null;
   searchQuery!: string;
 
   // Inyección de dependencias e inicialización de observables
@@ -28,9 +31,12 @@ export class SearchResultsComponent implements OnInit {
     private activatedRoute: ActivatedRoute
   ) {
     this.isLoadingSearchResults$ = this.store.pipe(
-      select(isLoadingSearchResultsSelector)
+      select(isLoadingResultsSelector)
     );
-    this.searchResults$ = this.store.pipe(select(searchResultsSelector));
+    this.searchResults$ = this.store.pipe(select(entitiesResultsSelector));
+    this.searchResultsError$ = this.store.pipe(
+      select(searchResultsErrorSelector)
+    );
   }
 
   ngOnInit(): void {
@@ -41,7 +47,7 @@ export class SearchResultsComponent implements OnInit {
       } else {
         this.searchQuery = params['query'];
       }
-      // Carga de resultados
+      // Carga de resultados (permite compartir el link de búsqueda)
       this.store.dispatch(
         searchActions.loadSearchResults({ searchQuery: this.searchQuery })
       );

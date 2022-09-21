@@ -8,10 +8,12 @@ import { ActivatedRoute } from '@angular/router';
 import {
   isLoadingSelector as isLoadingMovieDetailsSelector,
   entitiesSelector as movieDetailsSelector,
+  errorSelector as movieDetailsErrorSelector,
 } from 'src/app/store/selectors/movie-details.selectors';
 import {
   isLoadingSelector as isLoadingMovieCreditsSelector,
   entitiesSelector as movieCreditsSelector,
+  errorSelector as movieCreditsErrorSelector,
 } from 'src/app/store/selectors/movie-credits.selectors';
 import * as movieDetailsActions from '../../store/actions/movie-details.actions';
 import * as movieCreditsActions from '../../store/actions/movie-credits.actions';
@@ -27,6 +29,8 @@ export class MovieComponent implements OnInit {
   isLoadingSelectedMovieCredits$: Observable<boolean>;
   movieDetails$: Observable<MovieDetails | null>;
   movieCredits$: Observable<Credits | null>;
+  movieDetailsError$: Observable<string | null>;
+  movieCreditsError$: Observable<string | null>;
 
   movieId!: number;
 
@@ -44,6 +48,12 @@ export class MovieComponent implements OnInit {
     );
     this.movieDetails$ = this.store.pipe(select(movieDetailsSelector));
     this.movieCredits$ = this.store.pipe(select(movieCreditsSelector));
+    this.movieDetailsError$ = this.store.pipe(
+      select(movieDetailsErrorSelector)
+    );
+    this.movieCreditsError$ = this.store.pipe(
+      select(movieCreditsErrorSelector)
+    );
   }
 
   ngOnInit(): void {

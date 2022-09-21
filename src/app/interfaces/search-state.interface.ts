@@ -1,8 +1,10 @@
-import { Movie } from "./tmdb.interface";
+import { Movie } from './tmdb.interface';
 
 export interface SearchState {
-  isLoading: boolean;
-  entities: Movie[] | null;
+  isLoadingSuggestions: boolean;
+  isLoadingResults: boolean;
+  entitiesSuggestions: Movie[] | null;
+  entitiesResults: Movie[] | null;
   searchQuery: string | null;
   error: string | null;
 }
