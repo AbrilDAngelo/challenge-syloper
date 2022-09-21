@@ -11,6 +11,9 @@
 npm-debug.log
 yarn-error.log
 
+# Karma
+karma.conf.js
+
 # IDEs and editors
 .idea/
 .project
