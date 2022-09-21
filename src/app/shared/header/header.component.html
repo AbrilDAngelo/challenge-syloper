@@ -18,7 +18,6 @@
               placeholder="Buscar película..."
               [(ngModel)]="query"
               (input)="keyPressed()"
-              (blur)="clearQuery()"
             />
             <ng-container *ngIf="showSuggestions">
               <div class="suggestions-container">
@@ -32,6 +31,7 @@
                     <a
                       routerLink="/movie"
                       [queryParams]="{ id: suggestion.id }"
+                      (click)="clearQuery()"
                       >{{ suggestion.title }}</a
                     >
                   </li>

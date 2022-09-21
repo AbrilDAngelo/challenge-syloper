@@ -26,7 +26,7 @@
     !(popularMoviesError$ | async)
   "
 >
-  <div class="container">
+  <div class="container animated fadeIn">
     <div class="div" class="now-playing-container">
       <h1>Cartelera</h1>
       <!-- inicio carrusel cartelera -->
@@ -35,7 +35,7 @@
         class="carousel slide"
         data-bs-ride="carousel"
       >
-        <div class="carousel-inner">
+        <div class="carousel-inner animated fadeIn">
           <app-now-playing-carousel-slide
             [movie]="(nowPlayingMovies$ | async)![0]"
             active="active"
@@ -71,7 +71,7 @@
     </div>
     <h3>Películas</h3>
     <!-- inicio sección de películas populares -->
-    <div class="row movies-container">
+    <div class="row movies-container animated fadeIn">
       <div
         class="col-sm-6 col-md-3 flex-card-container"
         *ngFor="let movie of popularMovies$ | async | slice: 0:8"

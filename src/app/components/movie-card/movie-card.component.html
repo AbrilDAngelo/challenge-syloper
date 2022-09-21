@@ -8,7 +8,7 @@
     >
       <img
         class="poster"
-        [src]="movie.poster_path | image: 'w780':'poster'"
+        [src]="movie.poster_path! | image: 'w780':'poster'"
         alt="name"
       />
     </a>

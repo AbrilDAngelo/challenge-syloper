@@ -21,6 +21,7 @@ export class HeaderComponent implements OnInit {
   searchSuggestions$: Observable<Movie[] | null>;
 
   query!: string;
+  btnClicked = false;
   debouncer: Subject<string> = new Subject();
   showSuggestions: boolean = false;
 
