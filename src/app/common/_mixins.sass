@@ -1,22 +1,15 @@
 // _mixins.sass
 @use '../common/_variables' as variables
 
-@mixin img-card
+@mixin card
     border-radius: 8px
-    box-shadow: 0 2px 8px rgb(0 0 0 / 10%)
+    box-shadow: 0 2px 8px #22222236
     overflow: hidden
 
-@mixin card-subtitle($text-color)
-    display: block
-    font-weight: 400
-    font-size: 0.9em
-    color: $text-color
-    margin-bottom: 1em
-
 @mixin btn-small
-    padding-inline: 1.5em
-    height: 2.5em
-    border-radius: 5em
+    padding-inline: 20px
+    height: 40px
+    border-radius: 100px
     color: variables.$color-text-light
     background: linear-gradient(to right, #1ed5a9, #01b4e4)
     font-weight: 600

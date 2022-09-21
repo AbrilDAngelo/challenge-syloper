@@ -35,7 +35,7 @@ export class SearchResultsComponent implements OnInit {
       );
       this.searchResults$.subscribe((res) => {
         if (res !== null) {
-          this.searchResults = res;
+          this.searchResults = res.slice(0,8);
         }
       });
     });

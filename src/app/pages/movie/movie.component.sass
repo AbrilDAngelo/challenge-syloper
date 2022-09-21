@@ -2,7 +2,7 @@
 @use '../../common/_variables' as variables
 
 .poster-card
-    @include mixins.img-card
+    @include mixins.card
 
 .poster
     width: 100%
@@ -13,23 +13,20 @@
     background-size: cover
 
 .movie-main-info-container, .movie-cast-container
-    padding: 2em 3em
+    padding: 40px 50px
 
 .movie-info
     color: variables.$color-text-light
-    margin-top: 2em
+    margin-top: 40px
 
 .btn-back
     @include mixins.btn-small
-    margin-top: 1em
+    margin-top: 16px
 
 h2
     font-weight: 700
 
-h4
-    margin-bottom: 1em
-
 h5
     font-weight: 400
-    margin-bottom: 1em
-    margin-top: 1em
+    margin-bottom: 16px
+    margin-top: 16px

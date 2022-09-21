@@ -1,11 +1,11 @@
 .carousel-caption
-    padding-inline: 2em
+    padding-inline: 40px
     border-radius: 0px 0px 8px 8px
     text-align: start
     background: linear-gradient(to right, #1ed5aae5, #01b3e4f6)
-    bottom: 0em
-    left: 0em
-    right: 0em
+    bottom: 0
+    left: 0
+    right: 0
 
 h3
     font-weight: 700
@@ -16,10 +16,12 @@ h5
 img
     border-radius: 8px
 
+// Muestra captions en mobile
 .d-none
     display: block!important
 
 @media only screen and (max-width: 768px)
     .carousel-caption
+        padding-inline: 15px
         h5
             display: none

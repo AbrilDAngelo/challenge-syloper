@@ -2,7 +2,7 @@
 @use '../../common/_mixins' as mixins
 
 .actor-card
-    @include mixins.img-card
+    @include mixins.card
     flex: 1
 
 .flex-container
@@ -11,9 +11,8 @@
     align-items: stretch
     height: 100%
     width: 100%
-    
+
 .image-container
-    width: 100%
     aspect-ratio: 2/3
 
 .image
@@ -22,8 +21,13 @@
     object-fit: cover
 
 .actor-role
-    @include mixins.card-subtitle(variables.$color-text-dark)
-    margin-top: -0.5em
+    display: block
+    font-weight: 400
+    font-size: 0.9rem
+    color: variables.$color-text-dark
+    margin-bottom: 16px
+    margin-top: -8px
+    line-height: 1.2rem
 
 .actor-info
-    padding-inline: 0.5em
+    padding-inline: 10px

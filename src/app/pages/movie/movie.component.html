@@ -1,3 +1,4 @@
+<!-- inicio sección info de película -->
 <ng-container *ngIf="selectedMovieDetails">
   <div
     class="movie-main-info-container"
@@ -11,6 +12,7 @@
   >
     <div class="row">
       <div class="col-md-3 col-sm-12">
+        <!-- inicio poster -->
         <div class="poster-card">
           <img
             class="poster"
@@ -22,21 +24,25 @@
             alt="name"
           />
         </div>
+        <!-- fin poster -->
       </div>
       <div class="col-md-9 col-sm-12 movie-info">
         <h2>{{ selectedMovieDetails.title }}</h2>
+        <!-- inicio rating -->
         <app-rating
           [movieRating]="selectedMovieDetails.vote_average"
         ></app-rating>
+        <!-- fin rating -->
         <h5>{{ selectedMovieDetails.overview }}</h5>
         <button class="btn-back" routerLink="/">Regresar</button>
       </div>
     </div>
   </div>
 </ng-container>
+<!-- fin sección info de película -->
+<!-- inicio sección cast -->
 <ng-container *ngIf="cast">
   <div class="movie-cast-container">
-    <h4>Reparto principal</h4>
     <div class="row">
       <div class="col-md-2 col-sm-6" *ngFor="let actor of cast">
         <app-actor-card [actor]="actor"></app-actor-card>
@@ -44,3 +50,4 @@
     </div>
   </div>
 </ng-container>
+<!-- fin sección cast -->

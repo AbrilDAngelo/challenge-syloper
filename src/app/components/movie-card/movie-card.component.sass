@@ -2,7 +2,7 @@
 @use '../../common/_mixins' as mixins
 
 .movie-card
-    @include mixins.img-card
+    @include mixins.card
     width: 100%
     aspect-ratio: 2/3
 
@@ -11,11 +11,9 @@
     height: 100%
     object-fit: cover
 
-.movie-release-date
-    @include mixins.card-subtitle(variables.$color-text-medium-dark)
-
 .movie-info
-    padding-inline: 1em
+    padding-inline: 10px
+    margin-bottom: 5px
 
 .star-icon
     color: #d4d4d4

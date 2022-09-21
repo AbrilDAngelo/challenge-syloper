@@ -1,4 +1,5 @@
 <div class="card-container">
+  <!-- inicio poster -->
   <div class="movie-card">
     <a
       routerLink="/movie"
@@ -13,6 +14,8 @@
       />
     </a>
   </div>
+  <!-- fin poster -->
+  <!-- inicio info -->
   <div class="movie-info">
     <a
       routerLink="/movie"
@@ -20,6 +23,7 @@
       (click)="selectMovie()"
       ><span class="card-title">{{ movie.title }}</span></a
     >
+    <!-- inicio rating -->
     <ng-container
       *ngFor="let item of [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]; let i = index"
     >
@@ -33,5 +37,7 @@
         }"
       ></i>
     </ng-container>
+    <!-- fin rating -->
   </div>
+  <!-- fin info -->
 </div>

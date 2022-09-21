@@ -1,4 +1,5 @@
 <div class="carousel-item" [ngClass]="active">
+  <!-- inicio backdrop -->
   <a
     routerLink="/movie"
     [queryParams]="{ id: movie.id }"
@@ -11,6 +12,8 @@
       alt="movie.title"
     />
   </a>
+  <!-- fin backdrop -->
+  <!-- inicio captions -->
   <div class="carousel-caption d-none d-md-block">
     <a
       routerLink="/movie"
@@ -22,4 +25,5 @@
     </a>
     <h5>{{ movie.overview }}...</h5>
   </div>
+  <!-- fin captions -->
 </div>

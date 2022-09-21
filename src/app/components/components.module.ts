@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MovieCardComponent } from './movie-card/movie-card.component';
-import { MovieResultCardComponent } from './movie-result-card/movie-result-card.component';
 import { NowPlayingCarouselSlideComponent } from './now-playing-carousel-slide/now-playing-carousel-slide.component';
 import { RouterModule } from '@angular/router';
 import { PipesModule } from '../pipes/pipes.module';
@@ -13,7 +12,6 @@ import { SpinnerComponent } from './spinner/spinner.component';
   declarations: [
     ActorCardComponent,
     MovieCardComponent,
-    MovieResultCardComponent,
     NowPlayingCarouselSlideComponent,
     RatingComponent,
     SpinnerComponent,
@@ -22,7 +20,6 @@ import { SpinnerComponent } from './spinner/spinner.component';
   exports: [
     ActorCardComponent,
     MovieCardComponent,
-    MovieResultCardComponent,
     NowPlayingCarouselSlideComponent,
     RatingComponent,
     SpinnerComponent,

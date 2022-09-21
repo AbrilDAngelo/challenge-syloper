@@ -1,17 +1,21 @@
 @use '../../common/_variables' as variables
+@use '../../common/_mixins' as mixins
+
+$spacing: 40px
+
 .carousel
-    margin-top: 2em
+    margin-top: $spacing
     border-radius: 8px
 
 .now-playing-container
-    padding: 3em
+    padding: $spacing
     background-image: linear-gradient(to right, #032541b1 50%, #01b3e4cb), url('../../../assets/section-container-bg.png')
     background-size: cover
-    margin-bottom: 2em
+    margin-bottom: $spacing
 
 .movies-container
-    margin-top: 1.5em
-    padding-inline: 2.5em
+    margin-top: $spacing
+    padding-inline: $spacing
 
 .carousel-control-next, .carousel-control-prev
     opacity: 100%
@@ -22,14 +26,14 @@
 h1
     color: variables.$color-text-light
     font-weight: 700
-    font-size: 3em
+    font-size: 3rem
 
 h3
     font-weight: 700
-    padding-inline: 1.4em
+    padding-inline: $spacing
 
 @media only screen and (max-width: 768px)
     .now-playing-container
-        padding: 1em
-    .movies-container
-        padding-inline: 1em
+        padding: 15px
+    .movies-container, h3
+        padding-inline: 15px
