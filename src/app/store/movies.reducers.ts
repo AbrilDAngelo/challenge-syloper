@@ -74,7 +74,7 @@ export const reducers = createReducer(
   // Selected movie details
   on(MoviesActions.loadSelectedMovieDetails, (state, action) => ({
     ...state,
-    isLoadingSelectedMovieDetails: false,
+    isLoadingSelectedMovieDetails: true,
     selectedMovieId: action.movieId,
   })),
   on(MoviesActions.loadSelectedMovieDetailsSuccess, (state, action) => ({
@@ -90,7 +90,7 @@ export const reducers = createReducer(
   // Selected movie credits
   on(MoviesActions.loadSelectedMovieCredits, (state, action) => ({
     ...state,
-    isLoadingSelectedMovieCredits: false,
+    isLoadingSelectedMovieCredits: true,
     selectedMovieCreditsId: action.movieId,
   })),
   on(MoviesActions.loadSelectedMovieCreditsSuccess, (state, action) => ({
