@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { AppState } from 'src/app/interfaces/app-state.interface';
 import { Observable } from 'rxjs';
-import { Cast } from 'src/app/interfaces/tmdb.interface';
 import {
   selectedMovieDetailsSelector,
   selectedMovieCreditsSelector,
@@ -28,8 +27,6 @@ export class MovieComponent implements OnInit {
   selectedMovieDetails$: Observable<MovieDetails | null>;
   selectedMovieCredits$: Observable<Credits | null>;
 
-  selectedMovieDetails!: MovieDetails;
-  cast!: Cast[];
   movieId!: number;
   // Fallback imagen de perfil
   noImgUrl = '../../../../assets/no-poster.jpg';
@@ -66,18 +63,6 @@ export class MovieComponent implements OnInit {
       this.store.dispatch(
         MovieActions.loadSelectedMovieCredits({ movieId: this.movieId })
       );
-      // Suscripción a observables para solucionar error de 'object is possibly null' en template
-      this.selectedMovieDetails$.subscribe((res) => {
-        if (res !== null) {
-          this.selectedMovieDetails = res;
-        }
-      });
-      this.selectedMovieCredits$.subscribe((res) => {
-        if (res !== null) {
-          // Mostrar los primeros 6 resultados
-          this.cast = res.cast.slice(0, 6);
-        }
-      });
     });
   }
 

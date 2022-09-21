@@ -1,7 +1,9 @@
-<ng-container *ngIf="!searchResults">
+<!-- inicio loading spinner -->
+<ng-container *ngIf="isLoadingSearchResults$ | async">
   <app-spinner></app-spinner>
 </ng-container>
-<ng-container *ngIf="searchResults">
+<!-- fin loading spinner -->
+<ng-container *ngIf="!(isLoadingSearchResults$ | async)">
   <div class="container">
     <div class="title-container">
       <h2>
@@ -10,13 +12,18 @@
     </div>
     <!-- inicio sección resultados -->
     <div class="row movies-container">
-      <div class="col-sm-6 col-md-3" *ngFor="let movie of searchResults">
+      <div
+        class="col-sm-6 col-md-3"
+        *ngFor="let movie of searchResults$ | async"
+      >
         <app-movie-card [movie]="movie"></app-movie-card>
       </div>
     </div>
     <!-- fin sección resultados -->
     <!-- inicio alerta not-found -->
-    <ng-container *ngIf="!searchResults || searchResults?.length == 0">
+    <ng-container
+      *ngIf="!(searchResults$ | async) || (searchResults$ | async)!.length == 0"
+    >
       <h3>No hay resultados para la búsqueda</h3>
     </ng-container>
     <!-- fin alerta not-found -->

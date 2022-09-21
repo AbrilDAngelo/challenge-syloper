@@ -5,7 +5,10 @@ import { AppState } from 'src/app/interfaces/app-state.interface';
 import { Movie } from '../../interfaces/tmdb.interface';
 import * as MovieActions from '../../store/movies.actions';
 import { ActivatedRoute } from '@angular/router';
-import { searchResultsMoviesSelector } from '../../store/movies.selectors';
+import {
+  searchResultsMoviesSelector,
+  isLoadingSearchResultsSelector,
+} from '../../store/movies.selectors';
 
 @Component({
   selector: 'app-search-results',
@@ -15,9 +18,9 @@ import { searchResultsMoviesSelector } from '../../store/movies.selectors';
 export class SearchResultsComponent implements OnInit {
   // Observables
   searchResults$: Observable<Movie[]>;
+  isLoadingSearchResults$: Observable<boolean>;
 
   searchQuery!: string;
-  searchResults!: Movie[];
 
   // Inyección de dependencias e inicialización de observables
   constructor(
@@ -25,6 +28,9 @@ export class SearchResultsComponent implements OnInit {
     private activatedRoute: ActivatedRoute
   ) {
     this.searchResults$ = this.store.pipe(select(searchResultsMoviesSelector));
+    this.isLoadingSearchResults$ = this.store.pipe(
+      select(isLoadingSearchResultsSelector)
+    );
   }
 
   ngOnInit(): void {
@@ -39,13 +45,6 @@ export class SearchResultsComponent implements OnInit {
       this.store.dispatch(
         MovieActions.loadSearchResults({ searchQuery: this.searchQuery })
       );
-      // Suscripción a observable para solucionar error de 'object is possibly null' en template
-      this.searchResults$.subscribe((res) => {
-        if (res !== null) {
-          // Mostrar los primeros 8 resultados
-          this.searchResults = res.slice(0, 8);
-        }
-      });
     });
   }
 }
