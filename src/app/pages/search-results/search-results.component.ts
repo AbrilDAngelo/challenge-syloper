@@ -22,7 +22,6 @@ export class SearchResultsComponent implements OnInit {
   isLoadingSearchResults$: Observable<boolean>;
   searchResultsError$: Observable<string | null>;
 
-  searchResults!: Movie[] | null;
   searchQuery!: string;
 
   // Inyección de dependencias e inicialización de observables
