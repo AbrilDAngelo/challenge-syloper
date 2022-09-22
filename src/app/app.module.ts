@@ -26,6 +26,7 @@ import { MovieDetailsEffects } from './store/effects/movie-details.effects';
 import { NowPlayingMoviesEffects } from './store/effects/now-playing-movies.effects';
 import { PopularMoviesEffects } from './store/effects/popular-movies.effects';
 import { SearchEffects } from './store/effects/search.effects';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [AppComponent],
@@ -56,7 +57,7 @@ import { SearchEffects } from './store/effects/search.effects';
       logOnly: environment.production,
     }),
   ],
-  providers: [],
+  providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
