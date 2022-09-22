@@ -1,6 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { AppState } from 'src/app/interfaces/app-state.interface';
 import { Movie } from '../../interfaces/tmdb.interface';
 
 @Component({
