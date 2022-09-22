@@ -69,7 +69,7 @@
         class="col-md-2 col-sm-6"
         *ngFor="let actor of (movieCredits$ | async)!.cast | slice: 0:6"
       >
-        <app-actor-card [actor]="actor"></app-actor-card>
+        <app-actor-card [actor]="actor" class="animated fadeIn"></app-actor-card>
       </div>
     </div>
   </div>
