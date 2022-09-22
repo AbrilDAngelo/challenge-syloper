@@ -5,7 +5,10 @@
 <!-- fin loading spinner -->
 <!-- inicio error alerts -->
 <ng-container *ngIf="searchResultsError$ | async">
-  <app-error-alert [message]="(searchResultsError$ | async)!"></app-error-alert>
+  <app-error-alert
+    [message]="(searchResultsError$ | async)!"
+    title="Error cargando resultados"
+  ></app-error-alert>
 </ng-container>
 <!-- fin error alerts -->
 <ng-container
@@ -16,7 +19,7 @@
       <h2>
         Buscar: <span class="search-query">{{ searchQuery }}</span>
       </h2>
-      <hr>
+      <hr />
     </div>
     <!-- inicio sección resultados -->
     <div class="row movies-container animated fadeIn">
@@ -24,7 +27,10 @@
         class="col-sm-6 col-md-3"
         *ngFor="let movie of searchResults$ | async | slice: 0:8"
       >
-        <app-movie-card [movie]="movie" class="animated fadeIn"></app-movie-card>
+        <app-movie-card
+          [movie]="movie"
+          class="animated fadeIn"
+        ></app-movie-card>
       </div>
     </div>
     <!-- fin sección resultados -->

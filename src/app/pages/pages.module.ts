@@ -22,14 +22,6 @@ import { nowPlayingMoviesReducer } from '../store/reducers/now-playing-movies.re
     ComponentsModule,
     RouterModule,
     PipesModule,
-    StoreModule.forFeature('movies', nowPlayingMoviesReducer),
-    EffectsModule.forFeature([
-      MovieCreditsEffects,
-      MovieDetailsEffects,
-      NowPlayingMoviesEffects,
-      PopularMoviesEffects,
-      SearchEffects,
-    ]),
   ],
 })
 export class PagesModule {}

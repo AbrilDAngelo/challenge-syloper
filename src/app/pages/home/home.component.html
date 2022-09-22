@@ -2,10 +2,14 @@
 <ng-container *ngIf="nowPlayingMoviesError$ | async">
   <app-error-alert
     [message]="(nowPlayingMoviesError$ | async)!"
+    title="Error cargando cartelera"
   ></app-error-alert>
 </ng-container>
 <ng-container *ngIf="popularMoviesError$ | async">
-  <app-error-alert [message]="(popularMoviesError$ | async)!"></app-error-alert>
+  <app-error-alert
+    [message]="(popularMoviesError$ | async)!"
+    title="Error cargando películas populares"
+  ></app-error-alert>
 </ng-container>
 <!-- fin error alerts -->
 <!-- inicio loading spinner -->
@@ -55,7 +59,7 @@
           data-bs-slide="prev"
         >
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
+          <span class="visually-hidden">Anterior</span>
         </button>
         <button
           class="carousel-control-next"
@@ -64,7 +68,7 @@
           data-bs-slide="next"
         >
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
+          <span class="visually-hidden">Siguiente</span>
         </button>
       </div>
       <!-- fin carrusel cartelera -->
