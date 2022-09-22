@@ -1,11 +1,13 @@
 <div class="header">
   <div class="container">
     <div class="row">
+      <!-- inicio logo -->
       <div class="col-sm-12 col-md-6 text-md-start text-center logo">
         <a class="logo" routerLink="/" routerLinkActive="router-link-active">
           <img src="../../../assets/logo-app.png" />
         </a>
       </div>
+      <!-- fin logo -->
       <div class="col-sm-12 col-md-6">
         <div class="search" (mouseleave)="showSuggestions = false">
           <form (ngSubmit)="searchResults()">
@@ -19,6 +21,7 @@
               [(ngModel)]="query"
               (input)="keyPressed()"
             />
+            <!-- inicio sugerencias -->
             <ng-container *ngIf="showSuggestions">
               <div class="suggestions-container">
                 <ul class="list-group">
@@ -48,6 +51,7 @@
                 </ul>
               </div>
             </ng-container>
+            <!-- fin sugerencias -->
             <button type="submit" class="btn-search">Buscar</button>
           </form>
         </div>
