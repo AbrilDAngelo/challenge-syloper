@@ -17,7 +17,6 @@
   <app-spinner></app-spinner>
 </ng-container>
 <!-- fin loading spinner -->
-<!-- inicio sección cartelera -->
 <ng-container
   *ngIf="
     !(isLoadingNowPlayingMovies$ | async) &&
@@ -27,6 +26,7 @@
   "
 >
   <div class="container">
+    <!-- inicio sección cartelera -->
     <div class="div" class="now-playing-container animated fadeIn">
       <h1>Cartelera</h1>
       <!-- inicio carrusel cartelera -->
@@ -69,6 +69,7 @@
       </div>
       <!-- fin carrusel cartelera -->
     </div>
+    <!-- fin sección cartelera -->
     <h3>Películas</h3>
     <!-- inicio sección de películas populares -->
     <div class="row movies-container animated fadeIn">
@@ -81,5 +82,4 @@
     </div>
     <!-- fin sección de películas populares -->
   </div>
-  <!-- fin sección cartelera -->
 </ng-container>
