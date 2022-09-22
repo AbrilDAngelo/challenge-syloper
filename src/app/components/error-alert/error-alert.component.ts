@@ -8,6 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class ErrorAlertComponent implements OnInit {
   @Input() title: string = 'Error';
   @Input() message!: string;
+  
   constructor() {}
 
   ngOnInit(): void {}

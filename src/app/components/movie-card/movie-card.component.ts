@@ -11,8 +11,7 @@ import { Movie } from '../../interfaces/tmdb.interface';
 export class MovieCardComponent implements OnInit {
   @Input() movie!: Movie;
 
-  // Inyección de dependencias
-  constructor(private store: Store<AppState>) {}
+  constructor() {}
 
   ngOnInit(): void {}
 }

@@ -11,8 +11,8 @@ import { Movie } from 'src/app/interfaces/tmdb.interface';
 export class NowPlayingCarouselSlideComponent implements OnInit {
   @Input() movie!: Movie;
   @Input() active!: string;
-  // Inyección de dependencias
-  constructor(private store: Store<AppState>) {}
+
+  constructor() {}
 
   ngOnInit(): void {}
 }
