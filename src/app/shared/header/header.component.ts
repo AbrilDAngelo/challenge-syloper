@@ -68,11 +68,11 @@ export class HeaderComponent implements OnInit {
       queryParams: { query: this.query },
     });
     // Limpieza de sugerencias e input
-    this.showSuggestions = false;
     this.clearQuery();
   }
   // Limpieza de input
   clearQuery() {
     this.query = '';
+    this.showSuggestions = false;
   }
 }
